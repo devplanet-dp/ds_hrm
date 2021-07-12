@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691654779202",
+    "project_id": "ds-hrm",
+    "storage_bucket": "ds-hrm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691654779202:android:464a42eeb140b619e9a8db",
+        "android_client_info": {
+          "package_name": "com.dsbandarawela.ds_hrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691654779202-epcl6rn07kte47g82jfq41srvvpkbivr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqTFswYWuOgwNG-ceJTaLdSQ5ji5mD-oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691654779202-epcl6rn07kte47g82jfq41srvvpkbivr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

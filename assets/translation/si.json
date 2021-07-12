@@ -1,0 +1,36 @@
+{
+
+
+  "ds": "Divisional Secretariat",
+  "bandarawela": "Bandarawela",
+  "welcome": "Sign In to your Account",
+  "hrms": "Human Resource Management System",
+  "chng_locale": "භාෂාව තෝරන්න",
+  "tool": "Tools",
+  "dashboard": "Dashboard",
+  "staff": "Staff",
+  "other": "Other",
+  "sign_out": "Sign out",
+  "language": "Language",
+
+
+
+
+  "email": {
+    "hint": "Email",
+    "empty": "We need an email here",
+    "invalid": "Use a valid email"
+  },
+  "pwd": {
+    "hint": "Password",
+    "empty": "We need a password here",
+    "invalid": "Password should contain more than 6 characters"
+  },
+
+
+
+
+  "sign_in": "Sign In",
+  "done": "හරි"
+
+}
