@@ -16,10 +16,10 @@ class BackgroundOverlayWidget extends StatelessWidget {
           gradient: LinearGradient(colors: [
             !isDark
                 ? Colors.grey[300]!.withOpacity(.7)
-                : Colors.black.withOpacity(.7),
+                : Colors.black.withOpacity(.9),
             !isDark
                 ? Colors.grey[300]!.withOpacity(.1)
-                : Colors.black.withOpacity(.1)
+                : Colors.black.withOpacity(.3)
           ], begin: Alignment.bottomCenter, end: Alignment.topCenter)),
     );
   }

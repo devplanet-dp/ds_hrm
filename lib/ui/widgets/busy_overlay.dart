@@ -1,3 +1,4 @@
+import 'package:ds_hrm/ui/shared/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class BusyOverlay extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CupertinoActivityIndicator(),
+                  CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kcPrimaryColor),),
                   Text(title,
                       style: TextStyle(
                           fontSize: 16.0,

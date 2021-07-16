@@ -9,14 +9,15 @@ class DashViewModel extends BaseModel{
 
   Future addDivision()async{
     List<Division> div = [
-      Division(title: 'Establishment and Human Resource', code: 'EHR'),
-      Division(title: 'Social Service and Welfare', code: 'SSW'),
-      Division(title: 'Development Planning', code: 'DP'),
-      Division(title: 'Financial Management', code: 'FM'),
-      Division(title: 'Registrar', code: 'RG'),
-      Division(title: 'Land', code: 'LND'),
-      Division(title: 'Samurdhi', code: 'SMD'),
-      Division(title: 'Field', code: 'FD'),
+      Division(title: 'Bandarawela East', code: '65G'),
+      Division(title: 'Bandarawela West', code: '65B'),
+      Division(title: 'Kinigama', code: '70C'),
+      Division(title: 'Kabillewela South', code: '67C'),
+      Division(title: 'Doolgolla', code: '67C'),
+      Division(title: 'Obadaella', code: '67C'),
+      Division(title: 'Kirioruwa', code: '67C'),
+      Division(title: 'Konthehela', code: '67C'),
+
     ];
     div.forEach((e) async{
       setBusy(true);

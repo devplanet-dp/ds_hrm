@@ -10,7 +10,6 @@ import 'package:ds_hrm/ui/widgets/brand_bg_widget.dart';
 import 'package:ds_hrm/ui/widgets/busy_button.dart';
 import 'package:ds_hrm/ui/widgets/busy_overlay.dart';
 import 'package:ds_hrm/ui/widgets/text_field_widget.dart';
-import 'package:ds_hrm/utils/device_utils.dart';
 import 'package:ds_hrm/utils/validators.dart';
 import 'package:ds_hrm/viewmodel/login/login_view_model.dart';
 import 'package:ds_hrm/viewmodel/welcome/welcome_view_model.dart';

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ds_hrm/model/division.dart';
+import 'package:ds_hrm/model/education.dart';
+import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,8 @@ class FirestoreService {
   final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection('users');
 
-  final CollectionReference _staffCollectionReference =
-      FirebaseFirestore.instance.collection('staff');
+  final CollectionReference _empCollectionReference =
+      FirebaseFirestore.instance.collection(TB_EMPLOYEE);
 
   final CollectionReference _adminDivisionCollectionReference =
       FirebaseFirestore.instance.collection('division');
@@ -37,6 +39,7 @@ class FirestoreService {
   static const TB_DIVISION = 'division';
   static const TB_GN_DIVISION = 'gn_division';
   static const TB_DEV_DIVISION = 'dev_division';
+  static const TB_EMPLOYEE = 'employee';
 
   late FirebaseFirestore _firestore;
 
@@ -59,9 +62,38 @@ class FirestoreService {
     }
   }
 
+  Future<FirebaseResult> createEmployee(
+      {required Employee employee,
+      required List<Education> qualification}) async {
+    try {
+      await _empCollectionReference
+          .doc(employee.id)
+          .set(employee.toJson(), SetOptions(merge: true))
+          .then((value) => addQualification(employee.id, qualification));
+      return FirebaseResult(data: true);
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
+
+  Future addQualification(String docId, List<Education> q) async {
+    try {
+      List<Map> list = List.generate(q.length, (index) => q[index].toJson());
+      await _empCollectionReference
+          .doc(docId)
+          .set({'education', FieldValue.arrayUnion(list)});
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future createDivision(Division division) async {
     try {
-      await _adminDivisionCollectionReference.add(division.toJson());
+      await _devDivisionCollectionReference.add(division.toJson());
       return true;
     } catch (e) {
       if (e is PlatformException) {

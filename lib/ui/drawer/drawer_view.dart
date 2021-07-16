@@ -89,17 +89,19 @@ class _DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      selected: isSelected,
+      selectedTileColor:kBgDark,
       onTap: onTapped,
       leading: Icon(
         item.icon,
-        color: isSelected ? kcPrimaryColor : kAltWhite.withOpacity(0.5),
+        color: isSelected ? Colors.white : kAltWhite.withOpacity(0.5),
       ),
       title: AutoSizeText(
         item.title,
         maxLines: 1,
         style: kBodyStyle.copyWith(
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w200,
-            color: isSelected ? kcPrimaryColor : kAltWhite.withOpacity(0.5)),
+            color: isSelected ?  Colors.white : kAltWhite.withOpacity(0.5)),
       ),
     );
   }

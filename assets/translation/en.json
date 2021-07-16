@@ -13,18 +13,138 @@
   "sign_out": "Sign out",
   "language": "Language",
 
+  "personal_info": "Personal Information",
+  "bio": "Bio",
+  "job_info": "Job Information",
+  "emerge_contact": "Emergency Contact",
+  "education_qual": "Education Qualification",
+  "certification": "Certification/Training",
 
+
+  "pwd": {
+    "hint": "Password",
+    "empty": "We need a password here",
+    "invalid": "Password should contain more than 6 characters"
+  },
 
   "email": {
     "hint": "Email",
     "empty": "We need an email here",
     "invalid": "Use a valid email"
   },
-  "pwd": {
-    "hint": "Password",
-    "empty": "We need a password here",
-    "invalid": "Password should contain more than 6 characters"
+  "emp_name": {
+    "hint": "Employee Name",
+    "hint.first": "First name",
+    "empty.first": "Enter the first name",
+    "hint.last": "Last name",
+    "empty.last": "Enter the last name"
   },
+  "nic": {
+    "hint": "National Identity Card (NIC)",
+    "empty": "Enter NIC here"
+  },
+  "dob": {
+    "hint": "Date of Birth",
+    "empty": "Enter DOB here"
+  },
+  "address": {
+    "hint": "Address",
+    "empty": "Enter address here"
+  },
+  "division": {
+    "hint": "Division",
+    "empty": "Select a division here"
+  },
+  "mobile": {
+    "hint": "Mobile Number",
+    "empty": "Enter mobile number"
+  },
+  "nationality": {
+    "hint": "Nationality",
+    "empty": "Select nationality"
+  },
+  "gender": {
+    "hint": "Gender",
+    "empty": "Enter mobile number"
+  },
+  "religion": {
+    "hint": "Religion",
+    "empty": "Enter mobile number"
+  },
+  "marital": {
+    "hint": "Marital Status",
+    "empty": "Enter mobile number"
+  },
+  "designation": {
+    "hint": "Designation",
+    "empty": "Enter designation"
+  },
+  "emp_code": {
+    "hint": "Employee Code",
+    "empty": "Enter Employee code"
+  },
+  "head": {
+    "hint": "Head",
+    "empty": "Enter Manager's name"
+  },
+  "extension": {
+    "hint": "Extension",
+    "empty": "Enter extension number"
+  },
+  "department": {
+    "hint": "Department",
+    "empty": "Select the department"
+  },
+  "work_location": {
+    "hint": "Work Location",
+    "empty": ""
+  },
+  "join_date": {
+    "hint": "Joined Date",
+    "empty": "Enter the joined date"
+  },
+  "emerge_mobile": {
+    "hint": "Emergency Contact Number",
+    "empty": "Enter a mobile number here"
+  },
+  "emerge_name": {
+    "hint": "Emergency Contact Name",
+    "empty": "Enter a contact name"
+  },
+  "remark": {
+    "hint": "Additional comments"
+  },
+  "institution": {
+    "hint": "Institution",
+    "empty": "Enter the Institution name"
+  },
+  "year": {
+    "hint": "Year",
+    "empty": "Enter the Year"
+  },
+  "desc": {
+    "hint": "Description",
+    "empty": "Enter the Institution name"
+  },
+  "course_name": {
+    "hint": "Course Name",
+    "empty": "Enter the course name"
+  },
+  "course_type": {
+    "hint": "Course Type",
+    "empty": "Enter the course name"
+  },
+
+
+
+
+
+
+
+
+
+
+
 
 
 
