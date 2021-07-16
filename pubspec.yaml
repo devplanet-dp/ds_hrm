@@ -42,6 +42,7 @@ dependencies:
   #date
   flutter_datetime_picker:
   carousel_slider:
+  uuid:
 
   rxdart:
 

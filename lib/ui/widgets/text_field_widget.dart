@@ -35,7 +35,7 @@ class AppTextField extends StatelessWidget {
     required this.controller,
     this.onTap,
     this.hintText,
-    this.maxLength = 30,
+    this.maxLength = 100,
     this.isEmail = false,
     this.isEnabled = true,
     this.isTextArea = true,

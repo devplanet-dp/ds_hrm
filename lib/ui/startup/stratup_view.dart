@@ -46,7 +46,7 @@ class _StartUpViewState extends State<StartUpView>
         });
       },
       builder: (context, model, child) => Scaffold(
-        backgroundColor: kAltBg,
+        backgroundColor: kcPrimaryColor,
         body: Stack(
           children: [
             Center(
@@ -70,6 +70,9 @@ class _StartUpViewState extends State<StartUpView>
                   Align(
                     alignment: Alignment.center,
                     child: AnimatedTextKit(
+                      repeatForever: false,
+                      isRepeatingAnimation: false,
+
                       animatedTexts: [
                         TyperAnimatedText(
                             'Divisional Secretariat - Bandarawela',

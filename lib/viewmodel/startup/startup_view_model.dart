@@ -18,7 +18,13 @@ class StartupViewModel extends BaseModel {
     if (hasLoggedInUser.data??false) {
       _navigationService.replaceWith(HomeViewRoute);
     } else {
-      _navigationService.replaceWith(WelcomeViewRoute);
+      _autoLogin();
+      // _navigationService.replaceWith(WelcomeViewRoute);
     }
+  }
+  _autoLogin()async{
+    setBusy(true);
+   await  _authenticationService.loginWithEmail(email: 'admin@ds.gov', password: 'Admin#2021');
+    setBusy(false);
   }
 }

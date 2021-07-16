@@ -9,6 +9,7 @@
   "tool": "Tools",
   "dashboard": "Dashboard",
   "staff": "Staff",
+  "add_staff": "Employee Information",
   "other": "Other",
   "sign_out": "Sign out",
   "language": "Language",
@@ -32,12 +33,13 @@
     "empty": "We need an email here",
     "invalid": "Use a valid email"
   },
-  "emp_name": {
-    "hint": "Employee Name",
-    "hint.first": "First name",
-    "empty.first": "Enter the first name",
-    "hint.last": "Last name",
-    "empty.last": "Enter the last name"
+  "emp_name_first": {
+    "hint": "First name",
+    "empty": "Enter the first name"
+  },
+  "emp_name_last": {
+    "hint": "Last name",
+    "empty": "Enter the last name"
   },
   "nic": {
     "hint": "National Identity Card (NIC)",
@@ -52,6 +54,7 @@
     "empty": "Enter address here"
   },
   "division": {
+    "title": "Select a division",
     "hint": "Division",
     "empty": "Select a division here"
   },
@@ -73,6 +76,8 @@
   },
   "marital": {
     "hint": "Marital Status",
+    "true": "Married",
+    "false": "Un-Married",
     "empty": "Enter mobile number"
   },
   "designation": {
@@ -134,20 +139,6 @@
     "hint": "Course Type",
     "empty": "Enter the course name"
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   "sign_in": "Sign In",
   "done": "Done"

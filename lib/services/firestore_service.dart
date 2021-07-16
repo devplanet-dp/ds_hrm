@@ -21,6 +21,7 @@ class FirestoreService {
 
   final CollectionReference _gNDivisionCollectionReference =
       FirebaseFirestore.instance.collection('gn_division');
+
   final CollectionReference _devDivisionCollectionReference =
       FirebaseFirestore.instance.collection('development_division');
 
@@ -38,7 +39,7 @@ class FirestoreService {
   static const TB_USERS = 'users';
   static const TB_DIVISION = 'division';
   static const TB_GN_DIVISION = 'gn_division';
-  static const TB_DEV_DIVISION = 'dev_division';
+  static const TB_DEV_DIVISION = 'development_division';
   static const TB_EMPLOYEE = 'employee';
 
   late FirebaseFirestore _firestore;
@@ -238,5 +239,18 @@ class FirestoreService {
 
     return snap.map((snapshot) =>
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
+  }
+
+  Future<FirebaseResult> getDivisions(String divisionTable) async {
+    try {
+      var snap = await _firestore.collection(divisionTable).get();
+      return FirebaseResult(
+          data: snap.docs.map((doc) => Division.fromSnapshot(doc)).toList());
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
   }
 }

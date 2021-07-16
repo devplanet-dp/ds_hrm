@@ -20,12 +20,12 @@ class AppIconWidget extends StatelessWidget {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(kRadiusSmall))),
       clipBehavior: Clip.antiAlias,
-      color: bgColor ?? kcPrimaryColor,
+      color: bgColor,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Icon(
           iconData,
-          color: iconColor ?? kAltWhite,
+          color: iconColor,
         ),
       ),
     );

@@ -7,8 +7,8 @@ class Division {
 
   Division({required this.title, required this.code, this.sortOrder = 1});
 
-  Division.fromMap(Map<dynamic, dynamic> json) {
-    title = json['title'];
+  Division.fromMap(Map<String, dynamic>?  json) {
+    title = json!['title'];
     code = json['code'];
     sortOrder = json['sort_order'];
   }
@@ -22,5 +22,5 @@ class Division {
   }
 
   Division.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data as Map<dynamic, dynamic>);
+      : this.fromMap(snapshot.data() as Map<String, dynamic>);
 }

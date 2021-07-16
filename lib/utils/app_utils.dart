@@ -22,6 +22,11 @@ String removeFirstWord(String word){
   }
   return word;
 }
+extension ParseToString on Object {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
 final kFormatCurrency = new NumberFormat.simpleCurrency(locale: 'en_US');
 
 void launchURL(String url) async =>

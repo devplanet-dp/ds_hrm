@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/ui/dashboard/dash_view.dart';
 import 'package:ds_hrm/ui/drawer/drawer_view.dart';
+import 'package:ds_hrm/ui/views/staff/staff_view.dart';
 import 'package:ds_hrm/ui/widgets/busy_overlay.dart';
 import 'package:ds_hrm/viewmodel/home/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +57,9 @@ class HomeView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex, UserModel currentUser) {
     switch (currentIndex) {
       case 0:
-        return DashView();
+        return StaffView();
       case 1:
-        return Container();
+        return StaffView();
       case 2:
         return Container();
       case 3:

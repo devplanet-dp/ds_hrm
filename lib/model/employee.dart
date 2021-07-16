@@ -3,6 +3,8 @@ import 'package:ds_hrm/model/education.dart';
 
 enum Religion { Buddhism, Hinduism, Islam, Christian }
 
+enum WorkLocation { Office,Field }
+
 enum Nationality { Sinhala, Tamil, Muslim, Burgher }
 enum Gender {
   Male,
@@ -22,12 +24,12 @@ class Employee {
   late Gender gender;
   late Nationality nationality;
   late Religion religion;
-  late String maritalStatus;
+  late bool maritalStatus;
   late String designation;
   late String empCode;
   late String head;
   late String department;
-  late String workLocation;
+  late WorkLocation workLocation;
   late String extention;
   late Timestamp joinedDate;
   late String emergeContactName;
@@ -78,7 +80,7 @@ class Employee {
     empCode = json['empCode'];
     head = json['head'];
     department = json['department'];
-    workLocation = json['work_location'];
+    workLocation = WorkLocation.values.elementAt(json['work_location']??1);
     extention = json['extention'];
     joinedDate = json['joinedDate'];
     emergeContactName = json['emergeContactName'];
@@ -105,7 +107,7 @@ class Employee {
     data['empCode'] = this.empCode;
     data['head'] = this.head;
     data['department'] = this.department;
-    data['work_location'] = this.workLocation;
+    data['work_location'] = this.workLocation.index;
     data['extention'] = this.extention;
     data['joinedDate'] = this.joinedDate;
     data['emergeContactName'] = this.emergeContactName;

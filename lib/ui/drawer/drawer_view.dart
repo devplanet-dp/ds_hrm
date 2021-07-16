@@ -16,30 +16,37 @@ class DrawerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DrawerViewModel>.reactive(
+      onModelReady: (model){
+        model.setSelectedTool(1);
+      },
       builder: (context, model, child) => Drawer(
         child: Material(
           elevation: 0,
-          color: kAltBg,
+          color: kcPrimaryColor,
           child: ListView(
+            padding: fieldPaddingAll,
             children: [
-              DrawerHeader(
-                  decoration: BoxDecoration(color: kBgDark),
-                  child: Center(
-                    child: ListTile(
-                      leading: Image.asset(
-                        kIcDSLogo,
-                      ),
-                      dense: true,
-                      title: AutoSizeText(
-                        'HRM',
-                        style: kHeading3Style.copyWith(
-                            color: kAltWhite,
-                            fontWeight: FontWeight.bold,
-                            wordSpacing: 8),
-                        maxLines: 1,
-                      ),
-                    ),
-                  )),
+              Material(
+                shape: RoundedRectangleBorder(borderRadius: kBorderSmall),
+                color: kcPrimaryColorLight.withOpacity(0.4),
+                child: ListTile(
+                  leading: Image.asset(kIcDSLogo),
+                  title: AutoSizeText(
+                    'HRM',
+                    style: kBodyStyle.copyWith(
+                        color: kAltWhite,
+                        fontWeight: FontWeight.bold,
+                        wordSpacing: 8),
+                    maxLines: 1,
+                  ),
+                  isThreeLine: true,
+                  subtitle: AutoSizeText(
+                    'Divisional Secretariat',
+
+                    style: kCaptionStyle.copyWith(fontSize: 8,color: kAltWhite),
+                  ),
+                ),
+              ),
               verticalSpaceSmall,
               ListView(
                 shrinkWrap: true,
@@ -90,7 +97,8 @@ class _DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       selected: isSelected,
-      selectedTileColor:kBgDark,
+      shape: RoundedRectangleBorder(borderRadius: kBorderSmall),
+      selectedTileColor: kcPrimaryColorDark,
       onTap: onTapped,
       leading: Icon(
         item.icon,
@@ -101,7 +109,7 @@ class _DrawerItem extends StatelessWidget {
         maxLines: 1,
         style: kBodyStyle.copyWith(
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w200,
-            color: isSelected ?  Colors.white : kAltWhite.withOpacity(0.5)),
+            color: isSelected ? Colors.white : kAltWhite.withOpacity(0.5)),
       ),
     );
   }
