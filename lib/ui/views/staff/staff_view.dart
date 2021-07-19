@@ -41,35 +41,59 @@ class StaffView extends StatelessWidget {
             ).tr(),
             centerTitle: false,
             elevation: 1,
-          ),
-          body: ListView(
-            padding: fieldPaddingAll,
-            children: [
-              _FormSection(
-                  index: 1,
-                  sectionTitle: 'personal_info'.tr(),
-                  input: _buildPersonalInput(context, model)),
-              verticalSpaceSmall,
-              _FormSection(
-                  index: 2, sectionTitle: 'bio'.tr(), input: _buildBio(model)),
-              verticalSpaceSmall,
-              _FormSection(
-                  index: 3,
-                  sectionTitle: 'emerge_contact'.tr(),
-                  input: _buildEmergencyInput(context, model)),
-              verticalSpaceSmall,
-              _FormSection(
-                  index: 4,
-                  sectionTitle: 'job_info'.tr(),
-                  input: _buildJobInput(context, model)),
-              verticalSpaceSmall,
-              _FormSection(
-                  index: 5,
-                  sectionTitle: 'education_qual'.tr(),
-                  input: _EducationInput(
-                    model: model,
-                  ))
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ActionChip(
+                  label: Text(
+                    'submit'.tr().toUpperCase(),
+                    style: kBodyStyle.copyWith(
+                        color: kAltWhite, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    if (model.formKey.currentState!.validate()) {
+                      model.addStaff();
+                    }
+                  },
+                  backgroundColor: kcPrimaryColorLight,
+                ),
+              )
             ],
+          ),
+          body: Form(
+            key: model.formKey,
+            child: ListView(
+              padding: fieldPaddingAll,
+              children: [
+                _FormSection(
+                    index: 1,
+                    sectionTitle: 'personal_info'.tr(),
+                    input: _buildPersonalInput(context, model)),
+                verticalSpaceSmall,
+                _FormSection(
+                    index: 2,
+                    sectionTitle: 'bio'.tr(),
+                    input: _buildBio(model)),
+                verticalSpaceSmall,
+                _FormSection(
+                    index: 3,
+                    sectionTitle: 'emerge_contact'.tr(),
+                    input: _buildEmergencyInput(context, model)),
+                verticalSpaceSmall,
+                _FormSection(
+                    index: 4,
+                    sectionTitle: 'job_info'.tr(),
+                    input: _buildJobInput(context, model)),
+                verticalSpaceSmall,
+                _FormSection(
+                    index: 5,
+                    sectionTitle: 'education_qual'.tr(),
+                    input: _EducationInput(
+                      model: model,
+                    )),
+                verticalSpaceSmall,
+              ],
+            ),
           ),
         ),
       ),
@@ -115,6 +139,7 @@ class StaffView extends StatelessWidget {
         borderColor: kcPrimaryColor.withOpacity(0.4),
         fillColor: Colors.transparent,
         isDark: _.isDark(),
+        maxLength: 10,
         controller: _.emergeMobileTEC,
         hintText: 'emerge_mobile.hint'.tr(),
         validator: (value) {
@@ -167,6 +192,7 @@ class StaffView extends StatelessWidget {
         isEmail: false,
         isCapitalize: false,
         isMoney: true,
+        maxLength: 10,
         borderColor: kcPrimaryColor.withOpacity(0.4),
         fillColor: Colors.transparent,
         isDark: _.isDark(),

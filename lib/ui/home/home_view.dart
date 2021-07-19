@@ -57,7 +57,7 @@ class HomeView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex, UserModel currentUser) {
     switch (currentIndex) {
       case 0:
-        return StaffView();
+        return DashView();
       case 1:
         return StaffView();
       case 2:

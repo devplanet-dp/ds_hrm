@@ -43,6 +43,7 @@ dependencies:
   flutter_datetime_picker:
   carousel_slider:
   uuid:
+  percent_indicator:
 
   rxdart:
 

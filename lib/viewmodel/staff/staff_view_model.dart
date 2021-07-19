@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ds_hrm/model/division.dart';
 import 'package:ds_hrm/model/education.dart';
 import 'package:ds_hrm/model/employee.dart';
@@ -14,6 +15,8 @@ class StaffViewModel extends BaseModel {
   final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
   final _firestoreService = locator<FirestoreService>();
+
+  final formKey = GlobalKey<FormState>();
 
   ///text controller
   final firstNameTEC = TextEditingController();
@@ -236,6 +239,72 @@ class StaffViewModel extends BaseModel {
   }
 
   //endregion
+
+  Future addStaff() async {
+    setBusy(true);
+    Employee e = Employee(
+        id: Uuid().v4(),
+        firstName: firstNameTEC.text,
+        lastName: lastNameTEC.text,
+        nic: nicTEC.text,
+        dob: Timestamp.fromDate(dob),
+        address: addressTEC.text,
+        division: divisionTEC.text,
+        mobileNumber: mobileTEC.text,
+        email: emailTEC.text,
+        gender: selectedGender,
+        nationality: selectedNationality,
+        religion: selectedReligion,
+        maritalStatus: isMarried,
+        designation: designationTEC.text,
+        empCode: empCodeTEC.text,
+        head: dpHeadTEC.text,
+        department: adminDivisionTEC.text,
+        workLocation: selectedWorkLocation,
+        extention: extensionTEC.text,
+        joinedDate: Timestamp.fromDate(joinedDate),
+        emergeContactName: emergeNameTEC.text,
+        emergeMobileNumber: emergeMobileTEC.text,
+        remark: remarkTEC.text);
+
+    var result = await _firestoreService.createEmployee(
+        employee: e, qualification: education);
+    setBusy(false);
+    if (!result.hasError) {
+      _dialogService.showDialog(
+          description: 'Success', title: 'Employee added successfully!');
+      _resetView();
+    } else {
+      _dialogService.showDialog(
+          title: 'Sorry', description: result.errorMessage);
+    }
+  }
+
+  void _resetView() {
+    firstNameTEC.text = '';
+    lastNameTEC.text = '';
+    dobTEC.text = '';
+    nicTEC.text = '';
+    addressTEC.text = '';
+    divisionTEC.text = '';
+    emergeNameTEC.text = '';
+    emergeMobileTEC.text = '';
+    empCodeTEC.text = '';
+    designationTEC.text = '';
+    dpHeadTEC.text = '';
+    extensionTEC.text = '';
+    joinedDateTEC.text = '';
+    remarkTEC.text = '';
+    institutionTEC.text = '';
+    yearTEC.text = '';
+    descTEC.text = '';
+    mobileTEC.text = '';
+    emailTEC.text = '';
+    adminDivisionTEC.text = '';
+    education.clear();
+    notifyListeners();
+
+  }
 
   @override
   void dispose() {

@@ -232,13 +232,11 @@ class FirestoreService {
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
   }
 
-  Stream<List<UserModel>> streamAllUsers(String currentUid) {
-    Stream<QuerySnapshot> snap = _usersCollectionReference
-        .where('userId', isNotEqualTo: currentUid)
-        .snapshots();
+  Stream<List<Employee>> streamEmployees() {
+    Stream<QuerySnapshot> snap = _empCollectionReference.snapshots();
 
     return snap.map((snapshot) =>
-        snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
+        snapshot.docs.map((doc) => Employee.fromSnapshot(doc)).toList());
   }
 
   Future<FirebaseResult> getDivisions(String divisionTable) async {

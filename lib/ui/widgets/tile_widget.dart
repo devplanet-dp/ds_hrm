@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ds_hrm/ui/shared/ui_helpers.dart';
 import 'package:ds_hrm/utils/margin.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class TileWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: context.screenHeight(percent: 0.25),
+        height: context.screenHeight(percent: 0.20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
@@ -72,8 +73,9 @@ class TileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   YMargin(5),
-                  Text(
+                  AutoSizeText(
                     subHeader,
+                    maxLines: 2,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.w600, color: Colors.white),

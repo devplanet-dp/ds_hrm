@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 final ThemeData themeData = new ThemeData(
-    fontFamily: GoogleFonts.poppins(fontStyle: FontStyle.normal).fontFamily,
+  textTheme: GoogleFonts.poppinsTextTheme(),
     brightness: Brightness.light,
     backgroundColor:kAltWhite,
     scaffoldBackgroundColor: kAltWhite,
@@ -15,8 +15,7 @@ final ThemeData themeData = new ThemeData(
     accentColorBrightness: Brightness.light);
 
 final ThemeData themeDataDark = ThemeData(
-  fontFamily: GoogleFonts.poppins(fontStyle: FontStyle.normal).fontFamily,
-  textTheme: TextTheme().apply(bodyColor: kAltWhite,displayColor: kAltWhite),
+  textTheme: GoogleFonts.poppinsTextTheme(),
   brightness: Brightness.dark,
   backgroundColor: kAltBg,
   scaffoldBackgroundColor: kBlack,

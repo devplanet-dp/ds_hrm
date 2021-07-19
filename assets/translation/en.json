@@ -12,7 +12,11 @@
   "add_staff": "Employee Information",
   "other": "Other",
   "sign_out": "Sign out",
+  "submit": "Submit",
   "language": "Language",
+  "total_emp": "Total employees",
+  "total_dep": "Total departments",
+  "search": "Search",
 
   "personal_info": "Personal Information",
   "bio": "Bio",
@@ -141,6 +145,9 @@
   },
 
   "sign_in": "Sign In",
-  "done": "Done"
+  "done": "Done",
+
+  "emp_creation_success": "Employee added successfully!",
+  "success": "Success"
 
 }

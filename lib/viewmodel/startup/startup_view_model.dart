@@ -18,8 +18,8 @@ class StartupViewModel extends BaseModel {
     if (hasLoggedInUser.data??false) {
       _navigationService.replaceWith(HomeViewRoute);
     } else {
-      _autoLogin();
-      // _navigationService.replaceWith(WelcomeViewRoute);
+      // _autoLogin();
+      _navigationService.replaceWith(WelcomeViewRoute);
     }
   }
   _autoLogin()async{
