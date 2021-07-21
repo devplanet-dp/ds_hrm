@@ -16,7 +16,9 @@
   "language": "Language",
   "total_emp": "Total employees",
   "total_dep": "Total departments",
-  "search": "Search",
+  "search": "Search here...",
+  "name": "Full name",
+  "emp": "Employees",
 
   "personal_info": "Personal Information",
   "bio": "Bio",

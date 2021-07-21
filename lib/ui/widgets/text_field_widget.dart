@@ -27,6 +27,7 @@ class AppTextField extends StatelessWidget {
   final int maxLength;
   final double verticalPadding;
   final TextInputAction textInputAction;
+  final double borderRadius;
 
   const AppTextField({
     Key? key,
@@ -56,7 +57,7 @@ class AppTextField extends StatelessWidget {
     this.validator,
     this.minLine = 1,
     this.fillColor,
-    this.borderColor = Colors.transparent, this.textInputAction = TextInputAction.next,
+    this.borderColor = Colors.transparent, this.textInputAction = TextInputAction.next, this.borderRadius = 4,
   }) : super(key: key);
 
   @override
@@ -128,37 +129,37 @@ class AppTextField extends StatelessWidget {
                   : textColor.withOpacity(0.4)),
           filled: true,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: borderColor,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: Colors.red,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: borderColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: borderColor,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: borderColor,
             ),
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: BorderSide(
               color: borderColor,
             ),

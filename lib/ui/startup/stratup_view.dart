@@ -37,6 +37,7 @@ class _StartUpViewState extends State<StartUpView>
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartupViewModel>.reactive(
+      disposeViewModel: false,
       viewModelBuilder: () => StartupViewModel(),
       onModelReady: (model) {
         _controller.addStatusListener((status) {

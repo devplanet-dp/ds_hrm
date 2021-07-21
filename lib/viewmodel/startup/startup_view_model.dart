@@ -13,6 +13,7 @@ class StartupViewModel extends BaseModel {
   final _firestoreService = locator<FirestoreService>();
 
   Future handleStartUpLogic() async {
+    _navigationService.replaceWith(WelcomeViewRoute);
     var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
 
     if (hasLoggedInUser.data??false) {

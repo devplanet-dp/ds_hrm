@@ -6,7 +6,7 @@ class AppInfoWidget extends StatelessWidget {
   final String translateKey;
   final IconData iconData;
   final bool isDark;
-  final Widget icon;
+  final Widget? icon;
 
   const AppInfoWidget(
       {Key? key,

@@ -25,16 +25,16 @@ class FirestoreService {
   final CollectionReference _devDivisionCollectionReference =
       FirebaseFirestore.instance.collection('development_division');
 
-  final StreamController<List<UserModel>> _userController =
-      StreamController<List<UserModel>>.broadcast();
+  final StreamController<List<Employee>> _empController =
+      StreamController<List<Employee>>.broadcast();
 
   // #6: Create a list that will keep the paged results
-  List<List<UserModel>> _allPagedResults = [];
+  List<List<Employee>> _allPagedResults = [];
 
   static const int UserLimit = 20;
 
-  late DocumentSnapshot _lastDocument;
-  late bool _hasMoreUsers = true;
+  DocumentSnapshot? _lastDocument;
+  bool _hasMoreUsers = true;
 
   static const TB_USERS = 'users';
   static const TB_DIVISION = 'division';
@@ -121,22 +121,23 @@ class FirestoreService {
     }
   }
 
-  Stream listenToUserslTime(String searchKey) {
+  Stream listenToEmployeesRealTime(String searchKey) {
+
     // Register the handler for when the posts data changes
-    _requestMoreUsers(searchKey);
-    return _userController.stream;
+    _requestMoreEmployees(searchKey);
+    return _empController.stream;
   }
 
   // #1: Move the request posts into it's own function
-  void _requestMoreUsers(String searchKey) {
+  void _requestMoreEmployees(String searchKey) {
     // #2: split the query from the actual subscription
-    var pagePostsQuery = _usersCollectionReference
-        .orderBy('createdDate', descending: true)
+    var pagePostsQuery = _empCollectionReference
+        // .orderBy('joinedDate', descending: false)
         // #3: Limit the amount of results
         .limit(UserLimit);
     // #5: If we have a document start the query after it
-    if (_lastDocument != null) {
-      pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument);
+    if (_lastDocument!=null) {
+      pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument!);
     }
 
     if (!_hasMoreUsers) return;
@@ -147,7 +148,7 @@ class FirestoreService {
     pagePostsQuery.snapshots().listen((postsSnapshot) {
       if (postsSnapshot.docs.isNotEmpty) {
         var users = postsSnapshot.docs
-            .map((snapshot) => UserModel.fromSnapshot(snapshot))
+            .map((snapshot) => Employee.fromSnapshot(snapshot))
             .toList();
 
         // #8: Check if the page exists or not
@@ -163,11 +164,11 @@ class FirestoreService {
         }
 
         // #11: Concatenate the full list to be shown
-        var allPosts = _allPagedResults.fold<List<UserModel>>(
+        var allPosts = _allPagedResults.fold<List<Employee>>(
             [], (initialValue, pageItems) => initialValue..addAll(pageItems));
 
         // #12: Broadcase all posts
-        _userController.add(allPosts);
+        _empController.add(allPosts);
 
         // #13: Save the last document from the results only if it's the current last page
         if (currentRequestIndex == _allPagedResults.length - 1) {
@@ -180,7 +181,7 @@ class FirestoreService {
     });
   }
 
-  void requestMoreUsers(searchKey) => _requestMoreUsers(searchKey);
+  void requestMoreEmployees(searchKey) => _requestMoreEmployees(searchKey);
 
   Future<FirebaseResult> getUser(String uid) async {
     try {
