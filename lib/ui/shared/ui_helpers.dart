@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:ds_hrm/ui/widgets/brand_bg_widget.dart';
 
 import 'app_colors.dart';
 
@@ -46,7 +45,6 @@ AppBar noTitleAppBar({bool isLight = true, bool leading = true}) {
   );
 }
 
-
 class ShimmerWidget extends StatelessWidget {
   final bool isCircle;
 
@@ -60,17 +58,18 @@ class ShimmerWidget extends StatelessWidget {
     return Shimmer.fromColors(
         child: isCircle
             ? CircleAvatar(
-          radius: 30,
-          backgroundColor: kcMediumGreyColor,
-        )
+                radius: 30,
+                backgroundColor: kcMediumGreyColor,
+              )
             : SizedBox(
-          height: 20,
-          width: 50,
-        ),
+                height: 20,
+                width: 50,
+              ),
         baseColor: kcMediumGreyColor,
         highlightColor: kAltBg);
   }
 }
+
 class ShimmerView extends StatelessWidget {
   const ShimmerView({
     Key? key,
@@ -93,3 +92,13 @@ class ShimmerView extends StatelessWidget {
         ));
   }
 }
+// Screen Size helpers
+
+double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+
+double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
+    screenHeight(context) * percentage;
+
+double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
+    screenWidth(context) * percentage;

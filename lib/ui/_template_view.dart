@@ -14,8 +14,7 @@ class TemplateView extends StatelessWidget {
         child: Scaffold(
           body: Center(
             child: TextButton(
-                child: Text('Add'),
-                onPressed: (){}),
+                child: Text('Add'), onPressed: () => model.addStaff()),
           ),
         ),
       ),

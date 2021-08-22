@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:ds_hrm/model/user.dart';
+import 'package:ds_hrm/ui/_template_view.dart';
 import 'package:ds_hrm/ui/dashboard/dash_view.dart';
 import 'package:ds_hrm/ui/drawer/drawer_view.dart';
 import 'package:ds_hrm/ui/views/staff/staff_view.dart';

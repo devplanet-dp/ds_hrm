@@ -265,14 +265,17 @@ class StaffViewModel extends BaseModel {
         joinedDate: Timestamp.fromDate(joinedDate),
         emergeContactName: emergeNameTEC.text,
         emergeMobileNumber: emergeMobileTEC.text,
-        remark: remarkTEC.text);
+        remark: remarkTEC.text,
+        searchName: firstNameTEC.text.toLowerCase().trim() +
+            lastNameTEC.text.toLowerCase().trim(),
+        education: []);
 
     var result = await _firestoreService.createEmployee(
         employee: e, qualification: education);
     setBusy(false);
     if (!result.hasError) {
       _dialogService.showDialog(
-          description: 'Success', title: 'Employee added successfully!');
+          title: 'Success', description: 'Employee added successfully!');
       _resetView();
     } else {
       _dialogService.showDialog(
@@ -303,7 +306,6 @@ class StaffViewModel extends BaseModel {
     adminDivisionTEC.text = '';
     education.clear();
     notifyListeners();
-
   }
 
   @override

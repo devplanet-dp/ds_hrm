@@ -1,4 +1,6 @@
 import 'package:ds_hrm/constants/route_name.dart';
+import 'package:ds_hrm/model/employee.dart';
+import 'package:ds_hrm/ui/employee/emp_view.dart';
 import 'package:ds_hrm/ui/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name!,
         viewToShow: HomeView(),
+      );
+    case EmpViewRoute:
+      final emp = settings.arguments as Employee;
+      return _getPageRoute(
+        routeName: settings.name!,
+        viewToShow: EmpView(emp: emp),
       );
 
     default:

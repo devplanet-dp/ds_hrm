@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore_web:
   firebase_storage:
   firebase_storage_web:
+  firestore_helpers:
 
   image_picker:
   google_fonts:
@@ -44,6 +45,7 @@ dependencies:
   carousel_slider:
   uuid:
   percent_indicator:
+  age_calculator:
 
   rxdart:
 

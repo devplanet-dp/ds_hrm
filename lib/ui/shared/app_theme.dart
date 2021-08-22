@@ -8,7 +8,7 @@ final ThemeData themeData = new ThemeData(
   textTheme: GoogleFonts.poppinsTextTheme(),
     brightness: Brightness.light,
     backgroundColor:kAltWhite,
-    scaffoldBackgroundColor: kAltWhite,
+    scaffoldBackgroundColor: Colors.white,
     primaryColor: kcPrimaryColor,
     primaryColorBrightness: Brightness.light,
     accentColor: kcAccent,

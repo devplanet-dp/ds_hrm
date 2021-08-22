@@ -86,9 +86,9 @@ class FirestoreService {
       List<Map> list = List.generate(q.length, (index) => q[index].toJson());
       await _empCollectionReference
           .doc(docId)
-          .set({'education', FieldValue.arrayUnion(list)});
+          .update({'education': FieldValue.arrayUnion(list)});
     } catch (e) {
-      print(e);
+      print('ERROR:$e');
     }
   }
 
@@ -122,7 +122,6 @@ class FirestoreService {
   }
 
   Stream listenToEmployeesRealTime(String searchKey) {
-
     // Register the handler for when the posts data changes
     _requestMoreEmployees(searchKey);
     return _empController.stream;
@@ -136,7 +135,7 @@ class FirestoreService {
         // #3: Limit the amount of results
         .limit(UserLimit);
     // #5: If we have a document start the query after it
-    if (_lastDocument!=null) {
+    if (_lastDocument != null) {
       pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument!);
     }
 
@@ -233,12 +232,46 @@ class FirestoreService {
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
   }
 
-  Stream<List<Employee>> streamEmployees() {
-    Stream<QuerySnapshot> snap = _empCollectionReference.snapshots();
+  Stream<List<Employee>> streamEmployees(
+      String searchKey, SearchType type) {
+    Stream<QuerySnapshot> searchSnap;
+
+    ///change query according to search type
+    switch (type) {
+      case SearchType.name:
+        searchSnap = _empCollectionReference
+            .where('searchName', isGreaterThanOrEqualTo: searchKey)
+            .where('searchName', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      case SearchType.mobile:
+        searchSnap =    _empCollectionReference
+            .where('mobileNumber', isGreaterThanOrEqualTo: searchKey)
+            .where('mobileNumber', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      case SearchType.nic:
+        searchSnap =   _empCollectionReference
+            .where('nic', isGreaterThanOrEqualTo: searchKey)
+            .where('nic', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      default:
+        searchSnap = _empCollectionReference
+            .where('searchName', isGreaterThanOrEqualTo: searchKey)
+            .where('searchName', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+    }
+
+    Stream<QuerySnapshot> snap = searchKey.isNotEmpty
+        ? searchSnap!
+        : _empCollectionReference.snapshots();
 
     return snap.map((snapshot) =>
         snapshot.docs.map((doc) => Employee.fromSnapshot(doc)).toList());
   }
+
 
   Future<FirebaseResult> getDivisions(String divisionTable) async {
     try {

@@ -3,12 +3,17 @@ import 'package:ds_hrm/model/education.dart';
 
 enum Religion { Buddhism, Hinduism, Islam, Christian }
 
-enum WorkLocation { Office,Field }
+enum WorkLocation { Office, Field }
 
 enum Nationality { Sinhala, Tamil, Muslim, Burgher }
 enum Gender {
   Male,
   Female,
+}
+enum SearchType{
+  name,
+  mobile,
+  nic
 }
 
 class Employee {
@@ -35,7 +40,8 @@ class Employee {
   late String? emergeContactName;
   late String? emergeMobileNumber;
   late String? remark;
-
+  late List<Education> education;
+  late String? searchName;
 
   Employee(
       {required this.id,
@@ -60,36 +66,42 @@ class Employee {
       required this.joinedDate,
       required this.emergeContactName,
       required this.emergeMobileNumber,
+      required this.education,
+      required this.searchName,
       required this.remark});
 
   Employee.fromMap(Map<String, dynamic> json) {
-   try {
-     id = json['id'];
-     firstName = json['firstName'];
-     lastName = json['lastName'];
-     nic = json['nic'];
-     dob = json['dob'];
-     address = json['address'];
-     division = json['division'];
-     mobileNumber = json['mobileNumber'];
-     email = json['email'];
-     gender = Gender.values.elementAt(json['gender'] ?? 1);
-     nationality = Nationality.values.elementAt(json['nationality'] ?? 1);
-     religion = Religion.values.elementAt(json['religion'] ?? 1);
-     maritalStatus = json['maritalStatus'];
-     designation = json['designation'];
-     empCode = json['empCode'];
-     head = json['head'];
-     department = json['department'];
-     workLocation = WorkLocation.values.elementAt(json['work_location'] ?? 1);
-     extention = json['extention'];
-     joinedDate = json['joinedDate'];
-     emergeContactName = json['emergeContactName'];
-     emergeMobileNumber = json['emergeMobileNumber'];
-     remark = json['remark'];
-   }catch(e){
-     print(e);
-   }
+    try {
+      id = json['id'];
+      firstName = json['firstName'];
+      lastName = json['lastName'];
+      nic = json['nic'];
+      dob = json['dob'];
+      address = json['address'];
+      division = json['division'];
+      mobileNumber = json['mobileNumber'];
+      email = json['email'];
+      gender = Gender.values.elementAt(json['gender'] ?? 1);
+      nationality = Nationality.values.elementAt(json['nationality'] ?? 1);
+      religion = Religion.values.elementAt(json['religion'] ?? 1);
+      maritalStatus = json['maritalStatus'];
+      designation = json['designation'];
+      empCode = json['empCode'];
+      head = json['head'];
+      searchName = json['searchName'];
+      department = json['department'];
+      workLocation = WorkLocation.values.elementAt(json['work_location'] ?? 1);
+      extention = json['extention'];
+      joinedDate = json['joinedDate'];
+      emergeContactName = json['emergeContactName'];
+      emergeMobileNumber = json['emergeMobileNumber'];
+      remark = json['remark'];
+      education = (List.from(json['education'] ?? []))
+          .map((e) => Education.fromMap(e))
+          .toList();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +122,7 @@ class Employee {
     data['designation'] = this.designation;
     data['empCode'] = this.empCode;
     data['head'] = this.head;
+    data['searchName'] = this.searchName;
     data['department'] = this.department;
     data['work_location'] = this.workLocation!.index;
     data['extention'] = this.extention;

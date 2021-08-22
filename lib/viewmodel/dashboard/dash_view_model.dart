@@ -1,13 +1,18 @@
+import 'package:ds_hrm/constants/route_name.dart';
 import 'package:ds_hrm/model/division.dart';
 import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/services/firestore_service.dart';
 import 'package:ds_hrm/viewmodel/base_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../../locator.dart';
 
 class DashViewModel extends BaseModel {
   final _firestoreService = locator<FirestoreService>();
+  final _dialogService = locator<DialogService>();
+  final _navigationService = locator<NavigationService>();
 
   final searchTEC = TextEditingController();
 
@@ -28,9 +33,6 @@ class DashViewModel extends BaseModel {
       setBusy(false);
     });
   }
-
-  Stream<List<Employee>> streamEmployees() =>
-      _firestoreService.streamEmployees();
 
   //region division
   List<Division> _adminDivision = [];
@@ -57,12 +59,22 @@ class DashViewModel extends BaseModel {
 
   bool get isSearch => _searchKey.isNotEmpty;
 
-  bool _isSearch = false;
+  SearchType _selectedSearchType = SearchType.mobile;
+
+  SearchType get selectedSearchType => _selectedSearchType;
+
+  onSearchTypeSelected(SearchType type) {
+    _selectedSearchType = type;
+    notifyListeners();
+  }
 
   onValueChanged(String value) {
     _searchKey = value;
     notifyListeners();
   }
+
+  Stream<List<Employee>> streamEmployees() =>
+      _firestoreService.streamEmployees(_searchKey,_selectedSearchType);
 
   void requestMoreData() => _firestoreService.requestMoreEmployees(_searchKey);
 
@@ -78,12 +90,15 @@ class DashViewModel extends BaseModel {
     setBusy(false);
   }
 
-
   //endregion
 
   @override
   void dispose() {
     searchTEC.dispose();
     super.dispose();
+  }
+
+  showStaffDetails(Employee u) async {
+    _navigationService.navigateTo(EmpViewRoute, arguments: u);
   }
 }

@@ -16,35 +16,30 @@ class DrawerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DrawerViewModel>.reactive(
-      onModelReady: (model){
+      onModelReady: (model) {
         model.setSelectedTool(1);
       },
       builder: (context, model, child) => Drawer(
         child: Material(
           elevation: 0,
-          color: kcPrimaryColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: ListView(
-            padding: fieldPaddingAll,
+            padding: const EdgeInsets.only(right: 12.0),
             children: [
-              Material(
-                shape: RoundedRectangleBorder(borderRadius: kBorderSmall),
-                color: kcPrimaryColorLight.withOpacity(0.4),
-                child: ListTile(
-                  leading: Image.asset(kIcDSLogo),
-                  title: AutoSizeText(
-                    'HRM',
-                    style: kBodyStyle.copyWith(
-                        color: kAltWhite,
-                        fontWeight: FontWeight.bold,
-                        wordSpacing: 8),
-                    maxLines: 1,
-                  ),
-                  isThreeLine: true,
-                  subtitle: AutoSizeText(
-                    'Divisional Secretariat',
-
-                    style: kCaptionStyle.copyWith(fontSize: 8,color: kAltWhite),
-                  ),
+              ListTile(
+                leading: Image.asset(kIcDSLogo),
+                title: AutoSizeText(
+                  'HRM',
+                  style: kBodyStyle.copyWith(
+                      color: kAltBg,
+                      fontWeight: FontWeight.bold,
+                      wordSpacing: 8),
+                  maxLines: 1,
+                ),
+                isThreeLine: true,
+                subtitle: AutoSizeText(
+                  'Divisional Secretariat',
+                  style: kCaptionStyle.copyWith(fontSize: 8, color: kAltBg),
                 ),
               ),
               verticalSpaceSmall,
@@ -81,7 +76,7 @@ class DrawerView extends StatelessWidget {
       );
 }
 
-class _DrawerItem extends StatelessWidget {
+class _DrawerItem extends StatefulWidget {
   final DrawerItem item;
   final VoidCallback onTapped;
   final bool isSelected;
@@ -94,22 +89,48 @@ class _DrawerItem extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  __DrawerItemState createState() => __DrawerItemState();
+}
+
+class __DrawerItemState extends State<_DrawerItem> {
+  bool _isHovering = false;
+
+  @override
   Widget build(BuildContext context) {
-    return ListTile(
-      selected: isSelected,
-      shape: RoundedRectangleBorder(borderRadius: kBorderSmall),
-      selectedTileColor: kcPrimaryColorDark,
-      onTap: onTapped,
-      leading: Icon(
-        item.icon,
-        color: isSelected ? Colors.white : kAltWhite.withOpacity(0.5),
-      ),
-      title: AutoSizeText(
-        item.title,
-        maxLines: 1,
-        style: kBodyStyle.copyWith(
-            fontWeight: isSelected ? FontWeight.w800 : FontWeight.w200,
-            color: isSelected ? Colors.white : kAltWhite.withOpacity(0.5)),
+    return InkWell(
+      onHover: (isHovering) {
+        setState(() {
+          _isHovering = isHovering;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(kRadiusLarge * 2),
+              bottomRight: Radius.circular(kRadiusLarge * 2)),
+          color: widget.isSelected
+              ? kcPrimaryColorLight.withOpacity(0.4)
+              : Theme.of(context).scaffoldBackgroundColor,
+        ),
+        child: ListTile(
+          onTap: widget.onTapped,
+          leading: Icon(
+            widget.item.icon,
+            color: widget.isSelected
+                ? kcPrimaryColorDark.withOpacity(0.4)
+                : kAltBg.withOpacity(0.5),
+          ),
+          title: AutoSizeText(
+            widget.item.title,
+            maxLines: 1,
+            style: kBodyStyle.copyWith(
+                fontWeight:
+                    widget.isSelected ? FontWeight.w800 : FontWeight.w200,
+                color: widget.isSelected
+                    ? kcPrimaryColorDark.withOpacity(0.4)
+                    : kAltBg),
+          ),
+        ),
       ),
     );
   }

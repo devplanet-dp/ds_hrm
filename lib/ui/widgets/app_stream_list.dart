@@ -9,6 +9,7 @@ class AppStreamList extends StatelessWidget {
   final IconData emptyIcon;
   final String emptyText;
   final bool isDark;
+  final Widget separator;
 
   const AppStreamList(
       {Key? key,
@@ -16,7 +17,8 @@ class AppStreamList extends StatelessWidget {
       required this.itemBuilder,
       required this.emptyIcon,
       required this.emptyText,
-      required this.isDark})
+      required this.isDark,
+      this.separator = verticalSpaceSmall})
       : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class AppStreamList extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (_, index) => itemBuilder(index, data[index]),
-            separatorBuilder: (_, index) => verticalSpaceSmall,
+            separatorBuilder: (_, index) => separator,
           );
         });
   }

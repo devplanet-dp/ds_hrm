@@ -112,6 +112,10 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
+      onModelReady: (model){
+        emailController.text = 'admin@ds.gov';
+        passwordController.text = 'Admin#2021';
+      },
       builder: (context, model, child) => GestureDetector(
 
         child: Form(
