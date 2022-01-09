@@ -4,6 +4,8 @@ import 'package:ds_hrm/services/auth_service.dart';
 import 'package:ds_hrm/services/firestore_service.dart';
 import 'package:ds_hrm/ui/shared/bottom_sheet_type.dart';
 import 'package:ds_hrm/ui/views/language/locale_sheet_view.dart';
+import 'package:ds_hrm/ui/views/welcome_view.dart';
+import 'package:ds_hrm/utils/app_utils.dart';
 import 'package:ds_hrm/viewmodel/base_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -71,6 +73,17 @@ class LoginViewModel extends BaseModel {
         email: 'admin@ds.gov',
         password: "Admin#2021",
         fullName: 'Admin DS Bandarawela');
+    setBusy(false);
+  }
+
+  Future signOut(BuildContext context)async{
+    setBusy(true);
+    var result = await _authenticationService.signOutUser();
+    if(!result.hasError){
+      Get.offAll(()=>WelcomeView());
+    }else{
+      showErrorMessage(context, result.errorMessage);
+    }
     setBusy(false);
   }
 

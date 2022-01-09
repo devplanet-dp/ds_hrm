@@ -13,12 +13,15 @@
   "other": "Other",
   "sign_out": "Sign out",
   "submit": "Submit",
+  "sign_out_message": "Are you sure want to sign out?",
+  "yes": "Yes",
   "language": "Language",
   "total_emp": "Total employees",
   "total_dep": "Total departments",
   "search": "Search by name, mobile and NIC",
   "name": "Full name",
   "emp": "Employees",
+  "leasing": "Leasing",
 
   "personal_info": "Personal Information",
   "bio": "Bio",
@@ -26,6 +29,7 @@
   "emerge_contact": "Emergency Contact",
   "education_qual": "Education Qualification",
   "certification": "Certification/Training",
+
 
 
   "pwd": {

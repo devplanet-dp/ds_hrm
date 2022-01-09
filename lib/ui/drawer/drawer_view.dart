@@ -48,7 +48,7 @@ class DrawerView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: List.generate(
                     model.drawerTools.length,
-                    (index) => _DrawerItem(
+                    (index) => DrawerWidget(
                         item: model.drawerTools[index],
                         onTapped: () {
                           selectedIndex(index);
@@ -76,12 +76,12 @@ class DrawerView extends StatelessWidget {
       );
 }
 
-class _DrawerItem extends StatefulWidget {
+class DrawerWidget extends StatefulWidget {
   final DrawerItem item;
   final VoidCallback onTapped;
   final bool isSelected;
 
-  const _DrawerItem({
+  const DrawerWidget({
     Key? key,
     required this.item,
     required this.onTapped,
@@ -89,10 +89,10 @@ class _DrawerItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  __DrawerItemState createState() => __DrawerItemState();
+  _DrawerWidgetState createState() => _DrawerWidgetState();
 }
 
-class __DrawerItemState extends State<_DrawerItem> {
+class _DrawerWidgetState extends State<DrawerWidget> {
   bool _isHovering = false;
 
   @override
