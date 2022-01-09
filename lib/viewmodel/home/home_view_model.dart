@@ -8,7 +8,7 @@ import '../../locator.dart';
 class HomeViewModel extends IndexTrackingViewModel {
   final _authenticationService = locator<AuthenticationService>();
 
-  UserModel get currentUser => _authenticationService.currentUser;
+  UserModel? get currentUser => _authenticationService.currentUser;
 
   final ThemeService _themeService = locator<ThemeService>();
 

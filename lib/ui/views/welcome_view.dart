@@ -113,8 +113,12 @@ class _LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       onModelReady: (model){
+        //admin credentials
         emailController.text = 'admin@ds.gov';
         passwordController.text = 'Admin#2021';
+        //land credentials
+        // emailController.text = 'land@ds.gov';
+        // passwordController.text = 'Land#2022';
       },
       builder: (context, model, child) => GestureDetector(
 
@@ -221,15 +225,6 @@ class EmblemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          size.isMobile
-              ? SizedBox()
-              : AutoSizeText(
-                  'hrms'.tr(),
-                  maxLines: 1,
-                  style: kHeading1Style.copyWith(
-                      color: kAltWhite, fontWeight: FontWeight.bold),
-                ),
-          verticalSpaceMedium,
           Image.asset(
             kIcDSLogo,
             height: context.screenHeight(percent: size.isMobile ? 0.2 : 0.3),

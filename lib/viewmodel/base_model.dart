@@ -12,7 +12,7 @@ class BaseModel extends ChangeNotifier {
 
   bool isDark() => _themeService.isDarkMode;
 
-  UserModel get currentUser => _authenticationService.currentUser;
+  UserModel? get currentUser => _authenticationService.currentUser;
 
   toggleTheme() => _themeService.toggleDarkLightTheme();
 

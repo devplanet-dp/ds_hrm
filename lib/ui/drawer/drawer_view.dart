@@ -29,7 +29,7 @@ class DrawerView extends StatelessWidget {
               ListTile(
                 leading: Image.asset(kIcDSLogo),
                 title: AutoSizeText(
-                  'HRM',
+                  'Admin',
                   style: kBodyStyle.copyWith(
                       color: kAltBg,
                       fontWeight: FontWeight.bold,

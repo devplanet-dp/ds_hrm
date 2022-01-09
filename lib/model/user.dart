@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+enum Department { ADMIN, LAND, SALES }
+
 class UserModel {
   late String name;
   late String email;
@@ -9,6 +11,7 @@ class UserModel {
   late Timestamp createdDate;
   late bool isAdmin;
   late bool isSuperAdmin;
+  late Department department;
 
   UserModel(
       {required this.name,
@@ -29,6 +32,7 @@ class UserModel {
     isAdmin = json['isAdmin'];
     isSuperAdmin = json['isSuperAdmin'];
     createdDate = json['createdDate'];
+    department = Department.values[json['department'] ?? 0];
   }
 
   Map<String, dynamic> toJson() {
@@ -45,5 +49,5 @@ class UserModel {
   }
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data() as Map<String, dynamic>?);
+      : this.fromMap(snapshot.data());
 }

@@ -1,4 +1,5 @@
 import 'package:ds_hrm/constants/route_name.dart';
+import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/services/auth_service.dart';
 import 'package:ds_hrm/services/firestore_service.dart';
 import 'package:ds_hrm/ui/shared/bottom_sheet_type.dart';
@@ -74,7 +75,20 @@ class LoginViewModel extends BaseModel {
   }
 
   void navigateToHome() async {
-    _navigationService.replaceWith(HomeViewRoute);
+    Department department = currentUser!.department;
+    switch(department){
+
+      case Department.ADMIN:
+        _navigationService.replaceWith(HomeViewRoute);
+        break;
+      case Department.LAND:
+        _navigationService.replaceWith(LandHomeViewRoute);
+        break;
+      case Department.SALES:
+        // TODO: Handle this case.
+        break;
+    }
+
   }
 
   showLocaleSheet() async {

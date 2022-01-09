@@ -14,14 +14,13 @@ class StartupViewModel extends BaseModel {
 
   Future handleStartUpLogic() async {
     _navigationService.replaceWith(WelcomeViewRoute);
-    var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
-
-    if (hasLoggedInUser.data??false) {
-      _navigationService.replaceWith(HomeViewRoute);
-    } else {
-      _autoLogin();
-      // _navigationService.replaceWith(WelcomeViewRoute);
-    }
+    // var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
+    //
+    // if (hasLoggedInUser.data??false) {
+    //   _navigationService.replaceWith(HomeViewRoute);
+    // } else {
+    //   _navigationService.replaceWith(WelcomeViewRoute);
+    // }
   }
   _autoLogin()async{
     setBusy(true);

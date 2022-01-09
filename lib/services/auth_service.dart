@@ -10,9 +10,9 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirestoreService _firestoreService = locator<FirestoreService>();
 
-  late UserModel _currentUser;
+  UserModel? _currentUser;
 
-  UserModel get currentUser => _currentUser;
+  UserModel? get currentUser => _currentUser;
 
   Future loginWithEmail({
     required String email,
@@ -74,7 +74,7 @@ class AuthenticationService {
         isSuperAdmin: isSuperAdmin,
       );
 
-      var createUserResult = await _firestoreService.createUser(_currentUser);
+      var createUserResult = await _firestoreService.createUser(_currentUser!);
 
       return createUserResult;
     } catch (e) {

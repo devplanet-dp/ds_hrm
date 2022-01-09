@@ -28,24 +28,8 @@ class HomeView extends StatelessWidget {
                     )),
                 Expanded(
                     flex: 5,
-                    child: PageTransitionSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      reverse: model.reverse,
-                      transitionBuilder: (
-                        Widget child,
-                        Animation<double> animation,
-                        Animation<double> secondaryAnimation,
-                      ) {
-                        return SharedAxisTransition(
-                          child: child,
-                          animation: animation,
-                          secondaryAnimation: secondaryAnimation,
-                          transitionType: SharedAxisTransitionType.horizontal,
-                        );
-                      },
-                      child: getViewForIndex(
-                          model.currentIndex, model.currentUser),
-                    ))
+                    child: getViewForIndex(
+                        model.currentIndex))
               ],
             ),
           ),
@@ -55,7 +39,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget getViewForIndex(int currentIndex, UserModel currentUser) {
+  Widget getViewForIndex(int currentIndex) {
     switch (currentIndex) {
       case 0:
         return DashView();
