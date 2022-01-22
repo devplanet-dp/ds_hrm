@@ -1,17 +1,13 @@
-import 'package:animations/animations.dart';
-import 'package:ds_hrm/model/user.dart';
-import 'package:ds_hrm/ui/_template_view.dart';
-import 'package:ds_hrm/ui/dashboard/dash_view.dart';
-import 'package:ds_hrm/ui/drawer/drawer_view.dart';
+import 'package:ds_hrm/ui/dashboard/land/land_dash_view.dart';
+import 'package:ds_hrm/ui/drawer/land/land_drawer_view.dart';
 import 'package:ds_hrm/ui/views/signout/signout_view.dart';
-import 'package:ds_hrm/ui/views/staff/staff_view.dart';
 import 'package:ds_hrm/ui/widgets/busy_overlay.dart';
 import 'package:ds_hrm/viewmodel/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+class LandHomeView extends StatelessWidget {
+  const LandHomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +20,10 @@ class HomeView extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 1,
-                    child: DrawerView(
+                    child: LandDrawerView(
                       selectedIndex: model.setIndex,
                     )),
-                Expanded(
-                    flex: 5,
-                    child: getViewForIndex(
-                        model.currentIndex))
+                Expanded(flex: 5, child: getViewForIndex(model.currentIndex))
               ],
             ),
           ),
@@ -43,13 +36,13 @@ class HomeView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return DashView();
+        return LandDashboardView();
       case 1:
-        return StaffView();
+        return SignOutView();
       case 2:
         return Container();
       case 3:
-        return SignOutView();
+        return Container();
       case 4:
         return Container();
       default:

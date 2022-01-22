@@ -1,11 +1,12 @@
 import 'package:ds_hrm/constants/route_name.dart';
 import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/ui/employee/emp_view.dart';
-import 'package:ds_hrm/ui/home/land_home_view.dart';
+import 'package:ds_hrm/ui/home/account/account_home_view.dart';
+import 'package:ds_hrm/ui/home/land/land_home_view.dart';
 import 'package:ds_hrm/ui/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 
-import 'home/home_view.dart';
+import 'home/admin/home_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -23,6 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name!,
         viewToShow: LandHomeView(),
+      );
+    case AccountHomeViewRoute:
+      return _getPageRoute(
+        routeName: settings.name!,
+        viewToShow: AccountHomeView(),
       );
     case EmpViewRoute:
       final emp = settings.arguments as Employee;

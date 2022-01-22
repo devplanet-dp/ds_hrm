@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ds_hrm/model/branch.dart';
 import 'package:ds_hrm/model/division.dart';
 import 'package:ds_hrm/model/education.dart';
 import 'package:ds_hrm/model/employee.dart';
+import 'package:ds_hrm/model/item.dart';
 import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,19 @@ class FirestoreService {
 
   final CollectionReference _devDivisionCollectionReference =
       FirebaseFirestore.instance.collection('development_division');
+
+  final CollectionReference _branchCollection =
+      FirebaseFirestore.instance.collection(TB_BRANCH);
+
+  final CollectionReference _itemsCollection =
+      FirebaseFirestore.instance.collection(TB_ITEM);
+
+  final CollectionReference _saleCollection =
+      FirebaseFirestore.instance.collection(TB_SALE);
+
+  static const TB_ITEM = 'items';
+  static const TB_SALE = 'sale';
+  static const TB_BRANCH = 'branch';
 
   final StreamController<List<Employee>> _empController =
       StreamController<List<Employee>>.broadcast();
@@ -232,8 +247,7 @@ class FirestoreService {
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
   }
 
-  Stream<List<Employee>> streamEmployees(
-      String searchKey, SearchType type) {
+  Stream<List<Employee>> streamEmployees(String searchKey, SearchType type) {
     Stream<QuerySnapshot> searchSnap;
 
     ///change query according to search type
@@ -245,13 +259,13 @@ class FirestoreService {
             .snapshots();
         break;
       case SearchType.mobile:
-        searchSnap =    _empCollectionReference
+        searchSnap = _empCollectionReference
             .where('mobileNumber', isGreaterThanOrEqualTo: searchKey)
             .where('mobileNumber', isLessThan: searchKey + 'z')
             .snapshots();
         break;
       case SearchType.nic:
-        searchSnap =   _empCollectionReference
+        searchSnap = _empCollectionReference
             .where('nic', isGreaterThanOrEqualTo: searchKey)
             .where('nic', isLessThan: searchKey + 'z')
             .snapshots();
@@ -265,13 +279,12 @@ class FirestoreService {
     }
 
     Stream<QuerySnapshot> snap = searchKey.isNotEmpty
-        ? searchSnap!
+        ? searchSnap
         : _empCollectionReference.snapshots();
 
     return snap.map((snapshot) =>
         snapshot.docs.map((doc) => Employee.fromSnapshot(doc)).toList());
   }
-
 
   Future<FirebaseResult> getDivisions(String divisionTable) async {
     try {
@@ -284,5 +297,114 @@ class FirestoreService {
       }
       return FirebaseResult.error(errorMessage: e.toString());
     }
+  }
+
+  Future createItem(Item items) async {
+    try {
+      await _itemsCollection.doc(items.id).set(items.toJson());
+      return true;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+  Future updateItem(Item item) async {
+    try {
+      await _itemsCollection.doc(item.id).set(item.toJson());
+      return true;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+  Future removeItem(String id) async {
+    try {
+      await _itemsCollection.doc(id).delete();
+      return true;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+  Stream<List<Item>> searchAllItems({required String searchKey}) {
+    Stream<QuerySnapshot> snap = searchKey.isNotEmpty
+        ? _itemsCollection
+            .where('query', isGreaterThanOrEqualTo: searchKey)
+            .where('query', isLessThan: searchKey + 'z')
+            .snapshots()
+        : _itemsCollection.snapshots();
+
+    return snap.map((snapshot) =>
+        snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList());
+  }
+
+  Future<FirebaseResult> getAllItems(String filter) async {
+    try {
+      var snap = filter.isEmpty
+          ? await _itemsCollection.get()
+          : await _itemsCollection
+              .where('query', isGreaterThanOrEqualTo: filter)
+              .where('query', isLessThan: filter + 'z')
+              .get();
+      return FirebaseResult(
+          data: snap.docs.map((doc) => Item.fromSnapshot(doc)).toList());
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
+
+  Future<FirebaseResult> getAllBranches(String filter) async {
+    try {
+      var snap = filter.isEmpty
+          ? await _branchCollection.get()
+          : await _branchCollection
+              .where('query', isGreaterThanOrEqualTo: filter)
+              .where('query', isLessThan: filter + 'z')
+              .get();
+      return FirebaseResult(
+          data: snap.docs.map((doc) => Branch.fromSnapshot(doc)).toList());
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
+
+  Stream<List<Item>> streamItems() {
+    return _firestore
+        .collection(TB_ITEM)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs.map((doc) {
+        return Item.fromSnapshot(doc);
+      }).toList();
+    });
+  }
+
+  Stream<List<Branch>> streamBranches() {
+    return _firestore
+        .collection(TB_BRANCH)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs.map((doc) {
+        return Branch.fromSnapshot(doc);
+      }).toList();
+    });
   }
 }

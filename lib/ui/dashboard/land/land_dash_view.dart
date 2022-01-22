@@ -42,7 +42,7 @@ class LandDashboardView extends StatelessWidget {
                             child: TileWidget(
                           subHeader: 'leasing'.tr(),
                           isDark: model.isDark(),
-                          onTap: () {},
+                          onTap: () =>model.toLeasingView(),
                           icon: LineIcon.moneyCheck().icon!,
                           primaryColor: CupertinoColors.systemIndigo,
                           header: EmptyBox,

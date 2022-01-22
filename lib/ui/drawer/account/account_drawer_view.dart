@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ds_hrm/constants/app_assets.dart';
-import 'package:ds_hrm/model/drawer_item.dart';
-import 'package:ds_hrm/ui/drawer/drawer_view.dart';
+import 'package:ds_hrm/ui/drawer/admin/drawer_view.dart';
 import 'package:ds_hrm/ui/shared/app_colors.dart';
 import 'package:ds_hrm/ui/shared/shared_styles.dart';
 import 'package:ds_hrm/ui/shared/ui_helpers.dart';
@@ -9,14 +8,14 @@ import 'package:ds_hrm/viewmodel/drawer/drawer_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class LandDrawerView extends StatelessWidget {
+class AccountDrawerView extends StatelessWidget {
   Function(int) selectedIndex;
 
-  LandDrawerView({Key? key, required this.selectedIndex}) : super(key: key);
+  AccountDrawerView({Key? key, required this.selectedIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LandDrawerViewModel>.reactive(
+    return ViewModelBuilder<AccountDrawerViewModel>.reactive(
       onModelReady: (model) {
         model.setSelectedTool(1);
       },
@@ -30,7 +29,7 @@ class LandDrawerView extends StatelessWidget {
               ListTile(
                 leading: Image.asset(kIcDSLogo),
                 title: AutoSizeText(
-                  'Land',
+                  'Accounts',
                   style: kBodyStyle.copyWith(
                       color: kAltBg,
                       fontWeight: FontWeight.bold,
@@ -63,7 +62,7 @@ class LandDrawerView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => LandDrawerViewModel(),
+      viewModelBuilder: () => AccountDrawerViewModel(),
     );
   }
 

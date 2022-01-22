@@ -1,8 +1,9 @@
 import 'package:ds_hrm/constants/app_constants.dart';
-import 'package:ds_hrm/ui/home/home_view.dart';
+import 'package:ds_hrm/ui/home/admin/home_view.dart';
 import 'package:ds_hrm/ui/router.dart';
 import 'package:ds_hrm/ui/shared/app_theme.dart';
 import 'package:ds_hrm/ui/startup/stratup_view.dart';
+import 'package:ds_hrm/ui/views/lease/lease_view.dart';
 import 'package:ds_hrm/ui/views/welcome_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -89,6 +89,7 @@ class LoginViewModel extends BaseModel {
 
   void navigateToHome() async {
     Department department = currentUser!.department;
+    print(department.index);
     switch(department){
 
       case Department.ADMIN:
@@ -97,8 +98,8 @@ class LoginViewModel extends BaseModel {
       case Department.LAND:
         _navigationService.replaceWith(LandHomeViewRoute);
         break;
-      case Department.SALES:
-        // TODO: Handle this case.
+      case Department.ACCOUNT:
+        _navigationService.replaceWith(AccountHomeViewRoute);
         break;
     }
 

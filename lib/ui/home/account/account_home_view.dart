@@ -1,13 +1,13 @@
-import 'package:ds_hrm/ui/dashboard/land_dash_view.dart';
-import 'package:ds_hrm/ui/drawer/land_drawer_view.dart';
+import 'package:ds_hrm/ui/accounts/add_item_view.dart';
+import 'package:ds_hrm/ui/drawer/account/account_drawer_view.dart';
 import 'package:ds_hrm/ui/views/signout/signout_view.dart';
 import 'package:ds_hrm/ui/widgets/busy_overlay.dart';
 import 'package:ds_hrm/viewmodel/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class LandHomeView extends StatelessWidget {
-  const LandHomeView({Key? key}) : super(key: key);
+class AccountHomeView extends StatelessWidget {
+  const AccountHomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,10 @@ class LandHomeView extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 1,
-                    child: LandDrawerView(
+                    child: AccountDrawerView(
                       selectedIndex: model.setIndex,
                     )),
-                Expanded(
-                    flex: 5,
-                    child: getViewForIndex(
-                        model.currentIndex))
+                Expanded(flex: 5, child: getViewForIndex(model.currentIndex))
               ],
             ),
           ),
@@ -39,15 +36,13 @@ class LandHomeView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return LandDashboardView();
+        return Container();
       case 1:
-        return SignOutView();
+        return Container();
       case 2:
-        return Container();
+        return const AddItemView();
       case 3:
-        return Container();
-      case 4:
-        return Container();
+        return SignOutView();
       default:
         return Container();
     }

@@ -65,27 +65,27 @@ class StaffView extends StatelessWidget {
             child: ListView(
               padding: fieldPaddingAll,
               children: [
-                _FormSection(
+                FormSection(
                     index: 1,
                     sectionTitle: 'personal_info'.tr(),
                     input: _buildPersonalInput(context, model)),
                 verticalSpaceSmall,
-                _FormSection(
+                FormSection(
                     index: 2,
                     sectionTitle: 'bio'.tr(),
                     input: _buildBio(model)),
                 verticalSpaceSmall,
-                _FormSection(
+                FormSection(
                     index: 3,
                     sectionTitle: 'emerge_contact'.tr(),
                     input: _buildEmergencyInput(context, model)),
                 verticalSpaceSmall,
-                _FormSection(
+                FormSection(
                     index: 4,
                     sectionTitle: 'job_info'.tr(),
                     input: _buildJobInput(context, model)),
                 verticalSpaceSmall,
-                _FormSection(
+                FormSection(
                     index: 5,
                     sectionTitle: 'education_qual'.tr(),
                     input: _EducationInput(
@@ -707,12 +707,12 @@ class StaffView extends StatelessWidget {
 
 }
 
-class _FormSection extends StatelessWidget {
+class FormSection extends StatelessWidget {
   final int index;
   final String sectionTitle;
   final Widget input;
 
-  const _FormSection(
+  const FormSection(
       {Key? key,
       required this.index,
       required this.sectionTitle,
@@ -937,3 +937,4 @@ class _EducationInput extends StatelessWidget {
 
 //endregion
 }
+

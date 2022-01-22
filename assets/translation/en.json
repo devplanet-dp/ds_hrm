@@ -21,7 +21,7 @@
   "search": "Search by name, mobile and NIC",
   "name": "Full name",
   "emp": "Employees",
-  "leasing": "Leasing",
+  "leasing": "Tax",
 
   "personal_info": "Personal Information",
   "bio": "Bio",
@@ -29,6 +29,22 @@
   "emerge_contact": "Emergency Contact",
   "education_qual": "Education Qualification",
   "certification": "Certification/Training",
+
+  "lease_cal": "Tax Calculator",
+  "lease_no": "Tax/Permit No",
+  "period": "Period",
+  "from": "From(Year)",
+  "to": "To(Year)",
+  "data": "Data",
+  "installment": "Installment",
+  "fine_rate": "Fine Rate (%)",
+  "month_due": "Month Due (1-12)",
+  "revised": "Revised",
+  "every": "Every (Years)",
+  "rate": "Rate (%)",
+  "last_rate": "Last Revised (Year)",
+  "general": "General",
+
 
 
 
@@ -149,6 +165,14 @@
   "course_type": {
     "hint": "Course Type",
     "empty": "Enter the course name"
+  },
+  "common": {
+    "hint": "Course Type",
+    "empty": "This field is mandatory"
+  },
+  "full_name": {
+    "hint": "Full name",
+    "empty": "This field is mandatory"
   },
   "age": "Age",
 
