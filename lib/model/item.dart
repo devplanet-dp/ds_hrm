@@ -10,7 +10,7 @@ class Item {
   late String docId;
   late Timestamp createdAt;
   late Timestamp lastUpdated;
-
+  late String issuerName;
   Item(
       {required this.id,
       required this.name,
@@ -18,6 +18,7 @@ class Item {
       required this.query,
       required this.createdAt,
       required this.lastUpdated,
+      required this.issuerName,
       this.issuedAmount = 0,
       required this.amount});
 
@@ -30,6 +31,7 @@ class Item {
     issuedAmount = json['issued_amount'];
     createdAt = json['created_at'];
     lastUpdated = json['last_updated'];
+    issuerName = json['issuer_name']??'N/A';
     docId = doc;
   }
 
@@ -43,6 +45,7 @@ class Item {
     data['issued_amount'] = issuedAmount;
     data['created_at'] = createdAt;
     data['last_updated'] = lastUpdated;
+    data['issuer_name'] = issuerName;
 
     return data;
   }

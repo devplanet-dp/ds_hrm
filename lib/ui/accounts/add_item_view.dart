@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ds_hrm/model/item.dart';
 import 'package:ds_hrm/ui/shared/app_colors.dart';
 import 'package:ds_hrm/ui/shared/shared_styles.dart';
@@ -25,120 +26,128 @@ class AddItemView extends StatelessWidget {
           return Scaffold(
             body: Padding(
               padding: fieldPaddingAll,
-              child: Column(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: kAltBg,
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(kRadiusMedium))),
-                    child: Padding(
-                      padding: fieldPaddingAll * 2,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Form(
-                              key: model.formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  verticalSpaceMedium,
-                                  Row(
-                                    children: [
-                                      Text(
-                                        model.isUpdate
-                                            ? 'Update item here'
-                                            : 'Add item here',
-                                        style: kHeading3Style.copyWith(
-                                            color: kAltWhite,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
-                                      Visibility(
-                                        visible: model.isUpdate,
-                                        child: InkWell(
-                                          onTap: () =>
-                                              model.setUpdateView(false),
-                                          child: const CircleAvatar(
-                                            backgroundColor: kAltWhite,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(4.0),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: kAltBg,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: kAltBg,
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(kRadiusMedium))),
+                      child: Padding(
+                        padding: fieldPaddingAll * 2,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Form(
+                                key: model.formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    verticalSpaceMedium,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          model.isUpdate
+                                              ? 'Update item here'
+                                              : 'Add item here',
+                                          style: kHeading3Style.copyWith(
+                                              color: kAltWhite,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const Expanded(
+                                          child: SizedBox(),
+                                        ),
+                                        Visibility(
+                                          visible: model.isUpdate,
+                                          child: InkWell(
+                                            onTap: () =>
+                                                model.setUpdateView(false),
+                                            child: const CircleAvatar(
+                                              backgroundColor: kAltWhite,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(4.0),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: kAltBg,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  verticalSpaceMedium,
-                                  ItemText(
-                                    title: 'Item name',
-                                    controller: model.nameTEC,
-                                    isDark: true,
-                                  ),
-                                  verticalSpaceMedium,
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: ItemText(
-                                            title: 'Unit Price',
-                                            controller: model.priceTEC,
-                                            isDark: true,
-                                          )),
-                                      horizontalSpaceSmall,
-                                      Expanded(
-                                          child: ItemText(
-                                            title: 'Amount',
-                                            controller: model.amountTEC,
-                                            isDark: true,
-                                          )),
-                                    ],
-                                  ),
-                                  verticalSpaceMedium,
-                                  BoxButtonWidget(
-                                      buttonText: model.isUpdate
-                                          ? 'Update'
-                                          : 'Add Item',
-                                      buttonColor: kcPrimaryColor,
-                                      isLoading: model.busy,
-                                      onPressed: () {
-                                        if (!model.busy) {
-                                          if (model.formKey.currentState!
-                                              .validate()) {
-                                            model.isUpdate
-                                                ? model.updateItem()
-                                                : model.createItem();
+                                        )
+                                      ],
+                                    ),
+                                    verticalSpaceMedium,
+                                    ItemText(
+                                      title: 'Item name',
+                                      controller: model.nameTEC,
+                                      isDark: true,
+                                    ),
+                                    verticalSpaceMedium,
+                                    ItemText(
+                                      title: 'Issuer name',
+                                      controller: model.issuerNameTEC,
+                                      isDark: true,
+                                    ),
+                                    verticalSpaceMedium,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: ItemText(
+                                              title: 'Unit Price',
+                                              controller: model.priceTEC,
+                                              isDark: true,
+                                            )),
+                                        horizontalSpaceSmall,
+                                        Expanded(
+                                            child: ItemText(
+                                              title: 'Amount',
+                                              controller: model.amountTEC,
+                                              isDark: true,
+                                            )),
+                                      ],
+                                    ),
+                                    verticalSpaceMedium,
+                                    BoxButtonWidget(
+                                        buttonText: model.isUpdate
+                                            ? 'Update'
+                                            : 'Add Item',
+                                        buttonColor: kcPrimaryColor,
+                                        isLoading: model.busy,
+                                        onPressed: () {
+                                          if (!model.busy) {
+                                            if (model.formKey.currentState!
+                                                .validate()) {
+                                              model.isUpdate
+                                                  ? model.updateItem()
+                                                  : model.createItem();
+                                            }
                                           }
-                                        }
-                                      })
-                                ],
+                                        })
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          horizontalSpaceMedium,
-                          Expanded(
-                            flex: 3,
-                            child: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 500),
-                              child: model.isUpdate
-                                  ? EmptyBox
-                                  : _buildTiles(model),
+                            horizontalSpaceMedium,
+                            Expanded(
+                              flex: 3,
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 500),
+                                child: model.isUpdate
+                                    ? EmptyBox
+                                    : _buildTiles(model),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  verticalSpaceMedium,
-                  Expanded(child: _buildStockItems(model))
-                ],
+                    verticalSpaceMedium,
+                    _buildStockItems(model)
+                  ],
+                ),
               ),
             ),
           );
@@ -217,50 +226,48 @@ class AddItemView extends StatelessWidget {
       verticalSpaceMedium,
       const _TableHeaders(),
       verticalSpaceSmall,
-      Expanded(
-        child: AppStreamList(
-            stream: model.searchItems(),
-            itemBuilder: (index, emp) {
-              Item u = emp as Item;
-              bool _isSelected = u.id == model.selectedItem?.id;
-              return InkWell(
-                onTap: () => model.setSelectedItem(u),
-                child: Table(
-                  columnWidths: const <int, TableColumnWidth>{
-                    0: FlexColumnWidth(3),
-                    1: FlexColumnWidth(1),
-                    2: FlexColumnWidth(1),
-                    3: FlexColumnWidth(1),
-                    4: FlexColumnWidth(1),
-                    5: FlexColumnWidth(1),
-                  },
-                  children: [
-                    TableRow(
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(kRadiusMedium)),
-                            color: _isSelected
-                                ? kcPrimaryColorLight.withOpacity(0.2)
-                                : Colors.transparent),
-                        children: [
-                          TableContent(value: u.name),
-                          TableContent(value: u.price),
-                          TableContent(value: u.issuedAmount.toString()),
-                          TableContent(value: u.amount.toString()),
-                          TableContent(
-                              value: getFormattedDate(u.createdAt)),
-                          TableContent(
-                              value: getFormattedDate(u.lastUpdated)),
-                        ])
-                  ],
-                ),
-              );
-            },
-            emptyIcon: Icons.supervised_user_circle_outlined,
-            emptyText: 'No items found',
-            separator: EmptyBox,
-            isDark: model.isDark()),
-      )
+      AppStreamList(
+          stream: model.searchItems(),
+          itemBuilder: (index, emp) {
+            Item u = emp as Item;
+            bool _isSelected = u.id == model.selectedItem?.id;
+            return InkWell(
+              onTap: () => model.setSelectedItem(u),
+              child: Table(
+                columnWidths: const <int, TableColumnWidth>{
+                  0: FlexColumnWidth(3),
+                  1: FlexColumnWidth(1),
+                  2: FlexColumnWidth(1),
+                  3: FlexColumnWidth(1),
+                  4: FlexColumnWidth(1),
+                  5: FlexColumnWidth(1),
+                },
+                children: [
+                  TableRow(
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(kRadiusMedium)),
+                          color: _isSelected
+                              ? kcPrimaryColorLight.withOpacity(0.2)
+                              : Colors.transparent),
+                      children: [
+                        TableContent(value: u.name),
+                        TableContent(value: u.price),
+                        TableContent(value: u.issuedAmount.toString()),
+                        TableContent(value: u.amount.toString()),
+                        TableContent(
+                            value: getFormattedDate(u.createdAt)),
+                        TableContent(
+                            value: getFormattedDate(u.lastUpdated)),
+                      ])
+                ],
+              ),
+            );
+          },
+          emptyIcon: Icons.supervised_user_circle_outlined,
+          emptyText: 'No items found',
+          separator: EmptyBox,
+          isDark: model.isDark())
     ],
   );
 }
@@ -324,8 +331,9 @@ class TableContent extends StatelessWidget {
     return Padding(
       padding: fieldPaddingAll,
       child: Container(
-        child: Text(
+        child: AutoSizeText(
           value,
+          maxLines: 1,
           textAlign: TextAlign.start,
         ),
       ),

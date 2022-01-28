@@ -8,13 +8,14 @@ import 'package:uuid/uuid.dart';
 
 import '../../locator.dart';
 
-class ItemViewModel extends BaseModel{
+class ItemViewModel extends BaseModel {
   final _dialogService = locator<DialogService>();
   final _fireService = locator<FirestoreService>();
 
   final searchItemTEC = TextEditingController();
   final priceTEC = TextEditingController();
   final nameTEC = TextEditingController();
+  final issuerNameTEC = TextEditingController();
   final amountTEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -59,6 +60,7 @@ class ItemViewModel extends BaseModel{
         id: const Uuid().v4(),
         name: nameTEC.text,
         price: priceTEC.text,
+        issuerName: issuerNameTEC.text,
         query: nameTEC.text.toLowerCase(),
         amount: int.parse(amountTEC.text),
         lastUpdated: Timestamp.now(),
@@ -112,7 +114,8 @@ class ItemViewModel extends BaseModel{
         query: nameTEC.text.toLowerCase(),
         amount: int.parse(amountTEC.text),
         lastUpdated: Timestamp.now(),
-        createdAt: selectedItem?.createdAt ?? Timestamp.now());
+        createdAt: selectedItem?.createdAt ?? Timestamp.now(),
+        issuerName: issuerNameTEC.text);
     setBusy(true);
 
     var result = await _fireService.updateItem(updatedItem);
