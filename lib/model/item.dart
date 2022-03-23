@@ -51,5 +51,5 @@ class Item {
   }
 
   Item.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromJson(snapshot.data(), snapshot.id);
+      : this.fromJson(snapshot.data() as Map<String,dynamic>, snapshot.id);
 }

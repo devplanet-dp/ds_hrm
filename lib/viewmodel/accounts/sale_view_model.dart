@@ -31,6 +31,13 @@ class SaleViewModel extends BaseModel {
   final fileNoTEC = TextEditingController();
   final remarkTEC = TextEditingController();
 
+  final searchItemTEC = TextEditingController();
+  String _searchKey = '';
+  onValueChanged(String value) {
+    _searchKey = value;
+    notifyListeners();
+  }
+
   initForm() {
     dateTEC.text =
         getFormattedDate(Timestamp.fromDate(selectedDate), showTime: false);
@@ -205,4 +212,11 @@ class SaleViewModel extends BaseModel {
     });
     setBusy(false);
   }
+
+  Stream<List<Item>> searchItems() =>
+      _fireService.searchAllItems(searchKey: _searchKey);
+
+  Stream<List<Item>> allItemsStream() =>
+      _fireService.searchAllItems(searchKey: '');
+
 }

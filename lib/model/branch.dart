@@ -18,5 +18,5 @@ class Branch {
     data['name'] = this.name;
     return data;
   }
- Branch.fromSnapshot(DocumentSnapshot snapshot) : this.fromJson(snapshot.data());
+ Branch.fromSnapshot(DocumentSnapshot snapshot) : this.fromJson(snapshot.data()as Map<String,dynamic>);
 }

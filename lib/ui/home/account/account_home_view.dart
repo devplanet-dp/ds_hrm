@@ -1,4 +1,6 @@
 import 'package:ds_hrm/ui/accounts/add_item_view.dart';
+import 'package:ds_hrm/ui/accounts/add_sale_view.dart';
+import 'package:ds_hrm/ui/accounts/sale_summary_view.dart';
 import 'package:ds_hrm/ui/drawer/account/account_drawer_view.dart';
 import 'package:ds_hrm/ui/views/signout/signout_view.dart';
 import 'package:ds_hrm/ui/widgets/busy_overlay.dart';
@@ -36,9 +38,9 @@ class AccountHomeView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return Container();
+        return const AddSaleView();
       case 1:
-        return Container();
+        return const SaleSummaryView();
       case 2:
         return const AddItemView();
       case 3:

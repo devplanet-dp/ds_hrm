@@ -1,4 +1,5 @@
 import 'package:ds_hrm/constants/app_constants.dart';
+import 'package:ds_hrm/ui/home/account/account_home_view.dart';
 import 'package:ds_hrm/ui/home/admin/home_view.dart';
 import 'package:ds_hrm/ui/router.dart';
 import 'package:ds_hrm/ui/shared/app_theme.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
           title: APP_NAME,
           navigatorKey: StackedService.navigatorKey,
           theme: regularTheme,
-          home: StartUpView(),
+          home: WelcomeView(),
           onGenerateRoute: generateRoute,
         ));
   }

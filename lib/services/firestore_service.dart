@@ -6,6 +6,7 @@ import 'package:ds_hrm/model/division.dart';
 import 'package:ds_hrm/model/education.dart';
 import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/model/item.dart';
+import 'package:ds_hrm/model/sale.dart';
 import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +111,19 @@ class FirestoreService {
   Future createDivision(Division division) async {
     try {
       await _devDivisionCollectionReference.add(division.toJson());
+      return true;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+  Future createBranch(Branch branch) async {
+    try {
+      await _branchCollection.doc(branch.id).set(branch.toJson());
       return true;
     } catch (e) {
       if (e is PlatformException) {
@@ -278,9 +292,8 @@ class FirestoreService {
         break;
     }
 
-    Stream<QuerySnapshot> snap = searchKey.isNotEmpty
-        ? searchSnap
-        : _empCollectionReference.snapshots();
+    Stream<QuerySnapshot> snap =
+        searchKey.isNotEmpty ? searchSnap : _empCollectionReference.snapshots();
 
     return snap.map((snapshot) =>
         snapshot.docs.map((doc) => Employee.fromSnapshot(doc)).toList());
@@ -296,6 +309,48 @@ class FirestoreService {
         return FirebaseResult.error(errorMessage: e.message!);
       }
       return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
+
+  /// accounts services
+  Future<FirebaseResult> createSale(
+      {required Sale sale, required List<SaleItem> saleItems}) async {
+    try {
+      await _saleCollection
+          .doc(sale.id)
+          .set(sale.toJson(), SetOptions(merge: true))
+          .then((value) => addSaleItem(sale.id ?? '', saleItems));
+      return FirebaseResult(data: true);
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
+
+  Future updateItemOnSale(SaleItem sale) async {
+    try {
+      await _itemsCollection.doc(sale.id).update({
+        'amount': FieldValue.increment(-(int.parse(sale.issuedAmount ?? '0'))),
+        'issued_amount':
+            FieldValue.increment(int.parse(sale.issuedAmount ?? '0'))
+      });
+    } catch (e) {}
+  }
+
+  Future addSaleItem(String docId, List<SaleItem> q) async {
+    try {
+      List<Map> list = List.generate(q.length, (index) => q[index].toJson());
+      await _saleCollection
+          .doc(docId)
+          .update({'items': FieldValue.arrayUnion(list)});
+      for (var value in q) {
+        await updateItemOnSale(value);
+      }
+    } catch (e) {
+      print('ERROR:$e');
     }
   }
 

@@ -21,12 +21,14 @@ class AddItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ItemViewModel>.reactive(
+      onModelReady: (model)=>model.onValueChanged(''),
       builder: (context, model, child) => ResponsiveBuilder(
         builder: (_, size) {
           return Scaffold(
             body: Padding(
               padding: fieldPaddingAll,
               child: SingleChildScrollView(
+                controller: model.scrollController,
                 child: Column(
                   children: [
                     Container(
@@ -330,12 +332,10 @@ class TableContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: fieldPaddingAll,
-      child: Container(
-        child: AutoSizeText(
-          value,
-          maxLines: 1,
-          textAlign: TextAlign.start,
-        ),
+      child: AutoSizeText(
+        value,
+        maxLines: 1,
+        textAlign: TextAlign.start,
       ),
     );
   }

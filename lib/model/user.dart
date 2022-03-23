@@ -49,5 +49,5 @@ class UserModel {
   }
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data());
+      : this.fromMap(snapshot.data() as Map<String,dynamic>);
 }

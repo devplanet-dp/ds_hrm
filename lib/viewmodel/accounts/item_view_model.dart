@@ -17,6 +17,7 @@ class ItemViewModel extends BaseModel {
   final nameTEC = TextEditingController();
   final issuerNameTEC = TextEditingController();
   final amountTEC = TextEditingController();
+  final scrollController = ScrollController();
   final formKey = GlobalKey<FormState>();
 
   String _searchKey = '';
@@ -27,12 +28,18 @@ class ItemViewModel extends BaseModel {
 
   Item? get selectedItem => _selectedItem;
 
-  setSelectedItem(Item item) {
+  setSelectedItem(Item item) { 
+    _scrollToTop();
     _selectedItem = item;
     _setItemValues(item);
     setUpdateView(true);
     notifyListeners();
   }
+  void _scrollToTop() {
+    scrollController.animateTo(0,
+        duration: Duration(milliseconds: 500), curve: Curves.linear);
+  }
+
 
   bool get isUpdate => _isUpdate;
 
