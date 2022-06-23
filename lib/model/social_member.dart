@@ -53,4 +53,6 @@ class SocialMember {
     data['gn_division'] = this.gnDivision?.toJson();
     return data;
   }
+  SocialMember.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromJson(snapshot.data() as Map<String,dynamic>);
 }

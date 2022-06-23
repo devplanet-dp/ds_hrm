@@ -323,6 +323,43 @@ class FirestoreService {
         snapshot.docs.map((doc) => Employee.fromSnapshot(doc)).toList());
   }
 
+  Stream<List<SocialMember>> streamMembers(String searchKey, SearchType type) {
+    Stream<QuerySnapshot> searchSnap;
+
+    switch (type) {
+      case SearchType.name:
+        searchSnap = _socialMemberCollectionReference
+            .where('search_name', isGreaterThanOrEqualTo: searchKey)
+            .where('search_name', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      case SearchType.mobile:
+        searchSnap = _socialMemberCollectionReference
+            .where('mobile', isGreaterThanOrEqualTo: searchKey)
+            .where('mobile', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      case SearchType.nic:
+        searchSnap = _socialMemberCollectionReference
+            .where('nic', isGreaterThanOrEqualTo: searchKey)
+            .where('nic', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+      default:
+        searchSnap = _socialMemberCollectionReference
+            .where('search_name', isGreaterThanOrEqualTo: searchKey)
+            .where('search_name', isLessThan: searchKey + 'z')
+            .snapshots();
+        break;
+    }
+
+    Stream<QuerySnapshot> snap =
+    searchKey.isNotEmpty ? searchSnap : _socialMemberCollectionReference.snapshots();
+
+    return snap.map((snapshot) =>
+        snapshot.docs.map((doc) => SocialMember.fromSnapshot(doc)).toList());
+  }
+
   Future<FirebaseResult> getDivisions(String divisionTable) async {
     try {
       var snap = await _firestore.collection(divisionTable).get();

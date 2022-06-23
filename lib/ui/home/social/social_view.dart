@@ -1,5 +1,6 @@
 import 'package:ds_hrm/ui/drawer/social/social_drawer_view.dart';
 import 'package:ds_hrm/ui/views/social/add_memeber_view.dart';
+import 'package:ds_hrm/ui/views/social/search_member_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -40,12 +41,10 @@ class SocialView extends StatelessWidget {
   Widget getViewForIndex(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return Container();
+        return SocialHomeView();
       case 1:
         return AddMemebrView();
       case 2:
-        return Container();
-      case 3:
         return SignOutView();
       default:
         return Container();

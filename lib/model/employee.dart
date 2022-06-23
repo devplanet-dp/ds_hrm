@@ -12,8 +12,8 @@ enum Gender {
 }
 enum SearchType{
   name,
-  mobile,
-  nic
+  nic,
+  mobile
 }
 
 class Employee {
