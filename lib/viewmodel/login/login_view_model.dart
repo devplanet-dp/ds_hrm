@@ -8,6 +8,7 @@ import 'package:ds_hrm/ui/views/welcome_view.dart';
 import 'package:ds_hrm/utils/app_utils.dart';
 import 'package:ds_hrm/viewmodel/base_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../locator.dart';
@@ -89,7 +90,6 @@ class LoginViewModel extends BaseModel {
 
   void navigateToHome() async {
     Department department = currentUser!.department;
-    print(department.index);
     switch(department){
 
       case Department.ADMIN:
@@ -100,6 +100,10 @@ class LoginViewModel extends BaseModel {
         break;
       case Department.ACCOUNT:
         _navigationService.replaceWith(AccountHomeViewRoute);
+        break;
+      case Department.SOCIAL:
+        _navigationService.replaceWith(SocialViewRoute);
+        break;
         break;
     }
 

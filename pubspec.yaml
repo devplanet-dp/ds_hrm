@@ -18,6 +18,7 @@ dependencies:
   stacked:
   stacked_services:
   stacked_themes:
+  get:
 
   #firebase
   firebase_core_web: ^1.6.1

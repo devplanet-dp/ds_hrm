@@ -3,14 +3,17 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ds_hrm/model/branch.dart';
 import 'package:ds_hrm/model/division.dart';
+import 'package:ds_hrm/model/donation_type.dart';
 import 'package:ds_hrm/model/education.dart';
 import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/model/item.dart';
 import 'package:ds_hrm/model/sale.dart';
+import 'package:ds_hrm/model/social_member.dart';
 import 'package:ds_hrm/model/user.dart';
 import 'package:ds_hrm/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class FirestoreService {
   final CollectionReference _usersCollectionReference =
@@ -22,8 +25,8 @@ class FirestoreService {
   final CollectionReference _adminDivisionCollectionReference =
       FirebaseFirestore.instance.collection('division');
 
-  final CollectionReference _gNDivisionCollectionReference =
-      FirebaseFirestore.instance.collection('gn_division');
+  final CollectionReference _socialMemberCollectionReference =
+      FirebaseFirestore.instance.collection(TB_SOCIAL_MEMBER);
 
   final CollectionReference _devDivisionCollectionReference =
       FirebaseFirestore.instance.collection('development_division');
@@ -37,9 +40,14 @@ class FirestoreService {
   final CollectionReference _saleCollection =
       FirebaseFirestore.instance.collection(TB_SALE);
 
+  final CollectionReference _donationTypeCollection =
+  FirebaseFirestore.instance.collection(TB_DONATION);
+
   static const TB_ITEM = 'items';
   static const TB_SALE = 'sale';
   static const TB_BRANCH = 'branch';
+  static const TB_DONATION = 'donation_type';
+  static const TB_SOCIAL_MEMBER = 'social_member';
 
   final StreamController<List<Employee>> _empController =
       StreamController<List<Employee>>.broadcast();
@@ -105,6 +113,22 @@ class FirestoreService {
           .update({'education': FieldValue.arrayUnion(list)});
     } catch (e) {
       print('ERROR:$e');
+    }
+  }
+
+  Future<FirebaseResult> createSocialMember(
+      {required SocialMember member}) async {
+    try {
+      await _socialMemberCollectionReference
+          .doc(member.id)
+          .set(member.toJson(), SetOptions(merge: true));
+      return FirebaseResult(data: true);
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+
+      return FirebaseResult.error(errorMessage: e.toString());
     }
   }
 
@@ -311,6 +335,18 @@ class FirestoreService {
       return FirebaseResult.error(errorMessage: e.toString());
     }
   }
+  Future<FirebaseResult> getDonationTypes() async {
+    try {
+      var snap = await _donationTypeCollection.get();
+      return FirebaseResult(
+          data: snap.docs.map((doc) => DonationType.fromSnapshot(doc)).toList());
+    } catch (e) {
+      if (e is PlatformException) {
+        return FirebaseResult.error(errorMessage: e.message!);
+      }
+      return FirebaseResult.error(errorMessage: e.toString());
+    }
+  }
 
   /// accounts services
   Future<FirebaseResult> createSale(
@@ -460,6 +496,30 @@ class FirestoreService {
       return snapshot.docs.map((doc) {
         return Branch.fromSnapshot(doc);
       }).toList();
+    });
+  }
+
+  Future addFireValues()async{
+    var list = [
+      DonationType(id: Uuid().v4(),title: 'වැඩිහිටි ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'ආබාධිත ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'වකුගඩු ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'අධයාපන ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'සියක් ආයු ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'මහජනාධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'පිළිකාධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'රෝගාධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'අධයාපන ආධාර - පළාත් සභා',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+      DonationType(id: Uuid().v4(),title: 'ඖෂධ ආධාර',desc: '',organisation: OrganisationType.CENTRAL_GOVERNMENT),
+    ];
+    list.forEach((element)async {
+      try {
+        await _donationTypeCollection
+            .doc(element.id)
+            .set(element.toJson(), SetOptions(merge: true));
+      } catch (e) {
+        
+      }
     });
   }
 }

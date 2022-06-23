@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-enum Department { ADMIN, LAND, ACCOUNT }
+enum Department { ADMIN, LAND, ACCOUNT, SOCIAL }
 
 class UserModel {
   late String name;

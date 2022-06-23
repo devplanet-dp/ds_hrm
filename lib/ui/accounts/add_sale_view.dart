@@ -180,16 +180,11 @@ class AddSaleView extends StatelessWidget {
         ),
         verticalSpaceSmall,
         DropdownSearch<Branch>(
-          mode: Mode.DIALOG,
           items: model.branch,
-          isFilteredOnline: true,
-          showClearButton: true,
-          showSelectedItems: true,
-          compareFn: (item, selectedItem) => item?.id == selectedItem?.id,
-          showSearchBox: true,
+          compareFn: (item, selectedItem) => item.id == selectedItem.id,
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (u) => u == null ? "Branch field is required " : null,
-          onFind: (String? filter) async {
+          asyncItems: (String? filter) async {
             return await model.fetchAvailableBranches(filter ?? '');
           },
           itemAsString: (Branch? u) => u!.name,
@@ -209,16 +204,11 @@ class AddSaleView extends StatelessWidget {
         ),
         verticalSpaceSmall,
         DropdownSearch<Item>(
-          mode: Mode.DIALOG,
           items: model.items,
-          isFilteredOnline: true,
-          showClearButton: true,
-          showSelectedItems: true,
-          compareFn: (item, selectedItem) => item?.id == selectedItem?.id,
-          showSearchBox: true,
+          compareFn: (item, selectedItem) => item.id == selectedItem.id,
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (u) => u == null ? "Items field is required " : null,
-          onFind: (String? filter) async {
+          asyncItems: (String? filter) async {
             return await model.fetchAvailableItems(filter ?? '');
           },
           itemAsString: (Item? u) => '${u!.name} - ${u.amount}',

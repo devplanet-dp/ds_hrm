@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ds_hrm/ui/widgets/push_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 showErrorMessage(BuildContext context, String message) {
@@ -52,7 +52,7 @@ String getFormattedDate(Timestamp timestamp, {bool showTime = true}) {
 }
 
 void showSnack({required String title, required String message}) {
-  Get.showSnackbar(GetBar(
+  Get.showSnackbar(GetSnackBar(
     title: title,
     message: message,
     duration: const Duration(milliseconds: 1000),

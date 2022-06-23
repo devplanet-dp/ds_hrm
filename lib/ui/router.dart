@@ -3,6 +3,7 @@ import 'package:ds_hrm/model/employee.dart';
 import 'package:ds_hrm/ui/employee/emp_view.dart';
 import 'package:ds_hrm/ui/home/account/account_home_view.dart';
 import 'package:ds_hrm/ui/home/land/land_home_view.dart';
+import 'package:ds_hrm/ui/home/social/social_view.dart';
 import 'package:ds_hrm/ui/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name!,
         viewToShow: EmpView(emp: emp),
+      );
+    case SocialViewRoute:
+      return _getPageRoute(
+        routeName: settings.name!,
+        viewToShow: SocialView(),
       );
 
     default:

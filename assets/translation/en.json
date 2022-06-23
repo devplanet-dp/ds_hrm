@@ -10,6 +10,7 @@
   "dashboard": "Dashboard",
   "staff": "Staff",
   "add_staff": "Employee Information",
+  "add_member": "Member Information",
   "other": "Other",
   "sign_out": "Sign out",
   "submit": "Submit",
@@ -83,6 +84,11 @@
     "title": "Select a division",
     "hint": "Division",
     "empty": "Select a division here"
+  },
+  "donation": {
+    "title": "Select a donation",
+    "hint": "Donation",
+    "empty": "Select a donation here"
   },
   "mobile": {
     "hint": "Mobile Number",

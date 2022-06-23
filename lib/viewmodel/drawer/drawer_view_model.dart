@@ -67,3 +67,22 @@ class AccountDrawerViewModel extends BaseModel {
 
   List<DrawerItem> get drawerTools => _drawerTools;
 }
+class SocialDrawerViewModel extends BaseModel {
+  final List<DrawerItem> _drawerTools = [
+    DrawerItem(title: 'Dashboard', icon: Icons.assessment_outlined, id: 1),
+    DrawerItem(title: 'Add members', icon: Icons.border_color_outlined, id: 2),
+    DrawerItem(title: 'sign_out'.tr(), icon: LineIcons.alternateSignOut, id: 4),
+  ];
+  int _selectedTool = 0;
+
+  int get selectedTool => _selectedTool;
+
+  void setSelectedTool(int id) {
+    _selectedTool = id;
+    notifyListeners();
+  }
+
+  bool isToolSelected(int currentId) => selectedTool == currentId;
+
+  List<DrawerItem> get drawerTools => _drawerTools;
+}
